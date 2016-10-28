@@ -11,6 +11,7 @@ public class CivilianAI : MonoBehaviour {
 	public bool _shouldRun = true;
 	private GameObject _currentWaypoint;
 	private float _lastFindWaypointTime;
+	public Transform _centerPoint;
 
 
 	// Use this for initialization
@@ -27,7 +28,7 @@ public class CivilianAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.LookAt(_currentWaypoint.transform);
-		if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1 || Time.time - _lastFindWaypointTime > 10)
+		if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1 || Time.time - _lastFindWaypointTime > 15)
 		{
 			FindNewWaypoint();
 		}
@@ -62,7 +63,7 @@ public class CivilianAI : MonoBehaviour {
 		
 	private void FindNewWaypoint ()
 	{
-		_currentWaypoint.transform.position = new Vector3 (Random.Range(-25,25),0,Random.Range(0,50));
+		_currentWaypoint.transform.position = new Vector3 (_centerPoint.position.x + Random.Range(-50,50), 0, _centerPoint.position.y + Random.Range(-50,50));
 		_lastFindWaypointTime = Time.time;
 	}
 }

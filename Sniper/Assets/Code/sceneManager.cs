@@ -62,9 +62,9 @@ public class sceneManager : MonoBehaviour {
 		{
 			_leftController.gameObject.SetActive(true);
 			_rightController.gameObject.SetActive(true);
-			_head.position = new Vector3(0,11.6f,0);
-			_leftController.position = new Vector3(0,11.5f,1.5f);
-			_rightController.position = new Vector3(0,11.5f,0.1f);
+			_head.position = new Vector3(_head.position.x+1,_head.position.y+1.6f,_head.position.z);
+			_leftController.position = new Vector3(_leftController.position.x+1,_leftController.position.y+1.5f,_leftController.position.z-1.5f);
+			_rightController.position = new Vector3(_rightController.position.x+1,_rightController.position.y+1.5f,_rightController.position.z-0.1f);
 		}
 	}
 
@@ -311,7 +311,10 @@ public class sceneManager : MonoBehaviour {
 		{
 			_heartIcon1.enabled = false;
 			//_bloodSplatter.material.color = new Color(1,1,1,1);
-			SceneManager.LoadScene("rifle and npcs");
+			if (Application.loadedLevelName == "rifle and npcs")
+				SceneManager.LoadScene("rifle and npcs");
+			if (Application.loadedLevelName == "city 1")
+				SceneManager.LoadScene("city 1");
 		}
 	}
 }
