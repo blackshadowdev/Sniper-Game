@@ -45,6 +45,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AssetPacks\MCP\Demo\shaders\Vintage\Vintage.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Basic)\Sources\Scripts\WaterSimple.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Sources\Scripts\Water.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\Displace.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\GerstnerDisplace.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\MeshContainer.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\PlanarReflection.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\SpecularLighting.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\WaterBase.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\WaterTile.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\scripts\AdvancedCA.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\scripts\DynamicDOF.cs" />
+     <Compile Include="Assets\AssetPacks\MCP\scripts\Filmic.cs" />
      <Compile Include="Assets\AssetPacks\RPG Character Animation Pack\Code\CameraController.cs" />
      <Compile Include="Assets\AssetPacks\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
      <Compile Include="Assets\Code\AICharacterControlModified.cs" />
@@ -59,15 +73,20 @@
      <Compile Include="Assets\Code\deleteSelf.cs" />
      <Compile Include="Assets\Code\pivotRifle.cs" />
      <Compile Include="Assets\Code\sceneManager.cs" />
+     <None Include="Assets\Plugins\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\Plugins\Standard Assets\Effects\Projectors\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
+     <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\GlowConeTap.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_Fade.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\Normal-BumpSpec.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\Chromatic\AdvancedCA.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_BlitFlip.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_ClearAll.shader" />
@@ -77,9 +96,10 @@
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
-     <None Include="Assets\Plugins\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\GlowCompose.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />
@@ -89,6 +109,9 @@
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_HiddenArea.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\Normal-Bumped-DoubleSided.shader" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\FX-SimpleWater4.shader" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_Overlay.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
@@ -98,8 +121,13 @@
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
+     <None Include="Assets\Plugins\Standard Assets\Effects\Projectors\Shaders\Projector Light.shader" />
+     <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\GlowEffectDownsample.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\Filmic\Filmic.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\Vintage\Vintage.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
@@ -113,8 +141,10 @@
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Sources\Shaders\FX-Water.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrainDX11.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\glass.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_Blit.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />
@@ -125,6 +155,7 @@
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\TwirlEffect.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\VortexEffect.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\AssetPacks\MCP\Demo\shaders\glass_02.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrain.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
@@ -142,6 +173,8 @@
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\WaterInclude.cginc" />
+     <None Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\FX-Water4.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_ColorOut.shader" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\SimpleClear.shader" />
@@ -160,6 +193,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{AA5FFA6D-9368-FC16-DA0B-399CC4EF8CB8}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{96905018-B4DE-FDFE-5F1E-0282AA2E9E80}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
