@@ -13,8 +13,9 @@ using System.Collections;
 public class ViveControlsExample : MonoBehaviour {
 
 	private sceneManager _sceneManager;
+    private MenuManager _menuManager;
 	public string _leftOrRight;
-
+    public Laser _laser;
 
 
 	// Use this for initialization
@@ -25,6 +26,7 @@ public class ViveControlsExample : MonoBehaviour {
 		controller.PadClicked += OnPadClicked;
 
 		_sceneManager = GameObject.Find("Scene Manager").GetComponent<sceneManager>();
+        _menuManager = FindObjectOfType<MenuManager>();
 	}
 
 	void OnDisable(){
@@ -52,7 +54,22 @@ public class ViveControlsExample : MonoBehaviour {
 		// pull Trigger on Right Controller
 		if (_leftOrRight == "right")
 		{
-			_sceneManager.Fire();
+            if (_laser._newGameButtonClicked) {
+                _menuManager.LoadScene("MissionBriefing");
+            }
+
+            if (_laser._loadLevelButtonClicked) {
+                _menuManager.LoadScene(""); //TODO Mert: Add load level scene name
+            }
+
+            if (_laser._normalOptionButtonClicked) {
+                _menuManager.LoadScene(""); //TODO Mert: Add game scene name
+            }
+
+            if (_laser._hardOptionButtonClicked) {
+                _menuManager.LoadScene(""); //TODO Mert: Add game scene name
+            }
+            _sceneManager.Fire();
 		}
 	}
 
