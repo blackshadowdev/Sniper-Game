@@ -66,6 +66,7 @@
      <Compile Include="Assets\Code\Bullet.cs" />
      <Compile Include="Assets\Code\CivilianAI.cs" />
      <Compile Include="Assets\Code\EnemyManager.cs" />
+     <Compile Include="Assets\Code\GameplaySequence.cs" />
      <Compile Include="Assets\Code\Mert\Laser.cs" />
      <Compile Include="Assets\Code\Mert\MenuManager.cs" />
      <Compile Include="Assets\Code\PlayerHealthTrigger.cs" />
