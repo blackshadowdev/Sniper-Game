@@ -12,7 +12,7 @@ using System.Collections;
 [RequireComponent(typeof(SteamVR_TrackedController))]
 public class ViveControlsExample : MonoBehaviour {
 
-	private sceneManager _sceneManager;
+	public sceneManager _sceneManager;
     private MenuManager _menuManager;
 	public string _leftOrRight;
     public Laser _laser;
@@ -54,21 +54,23 @@ public class ViveControlsExample : MonoBehaviour {
 		// pull Trigger on Right Controller
 		if (_leftOrRight == "right")
 		{
-            if (_laser._newGameButtonClicked) {
-                _menuManager.LoadScene("MissionBriefing");
-            }
+			if (_laser) {
+				if (_laser._newGameButtonClicked) {
+					_menuManager.LoadScene ("MissionBriefing");
+				}
 
-            if (_laser._loadLevelButtonClicked) {
-                _menuManager.LoadScene(""); //TODO Mert: Add load level scene name
-            }
+				if (_laser._loadLevelButtonClicked) {
+					_menuManager.LoadScene (""); //TODO Mert: Add load level scene name
+				}
 
-            if (_laser._normalOptionButtonClicked) {
-                _menuManager.LoadScene(""); //TODO Mert: Add game scene name
-            }
+				if (_laser._normalOptionButtonClicked) {
+					_menuManager.LoadScene (""); //TODO Mert: Add game scene name
+				}
 
-            if (_laser._hardOptionButtonClicked) {
-                _menuManager.LoadScene(""); //TODO Mert: Add game scene name
-            }
+				if (_laser._hardOptionButtonClicked) {
+					_menuManager.LoadScene (""); //TODO Mert: Add game scene name
+				}
+			}
             _sceneManager.Fire();
 		}
 	}
