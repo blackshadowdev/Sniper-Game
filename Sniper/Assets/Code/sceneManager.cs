@@ -78,7 +78,7 @@ public class sceneManager : MonoBehaviour {
 
 		if (Input.GetKeyDown("f"))
 		{
-			Fire();
+			//Fire();
 			Invoke("TriggerUp", 0.5f);
 		}
 
