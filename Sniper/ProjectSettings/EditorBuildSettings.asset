@@ -9,3 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/build rifle.unity
   - enabled: 1
     path: Assets/Scenes/city 1.unity
+  - enabled: 1
+    path: Assets/Scenes/Mert/StartMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/Mert/MissionBriefing.unity

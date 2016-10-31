@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000010768116588}
+  m_IsPrefabParent: 1
+--- !u!1 &1000010768116588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011017323840}
+  - 114: {fileID: 114000010511016218}
+  m_Layer: 0
+  m_Name: Scene Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011017323840
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010768116588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000010511016218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010768116588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cf0a42c089f438893cdae47c5729f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laptopTesting: 0
+  _scopeOn: 0
+  _camera: {fileID: 0}
+  _scopeCamera: {fileID: 0}
+  _bloodPfxPrefab: {fileID: 482478, guid: 7afe42f4521854c9d841e3041865a25c, type: 2}
+  _leftController: {fileID: 0}
+  _rightController: {fileID: 0}
+  _head: {fileID: 0}
+  _rifleAudioSource: {fileID: 0}
+  _rifleShot: {fileID: 8300000, guid: 67745518e7f0540e8a2b92e4c7e26080, type: 3}
+  _rifleChamber: {fileID: 8300000, guid: 9de56e12ccc4d41f2852efb9a63f0f76, type: 3}
+  _magazineReload: {fileID: 8300000, guid: a0eddb1fc73964a3f9c079f9b96c6306, type: 3}
+  _rightPadY: 0
+  _padIsTouched: 0
+  _rifleCanFire: 0
+  _enemyManagerScript: {fileID: 0}
+  _bulletIcon1: {fileID: 0}
+  _bulletIcon2: {fileID: 0}
+  _bulletIcon3: {fileID: 0}
+  _bulletIcon4: {fileID: 0}
+  _scopePivot: {fileID: 0}
+  _lightSource: {fileID: 0}
+  _fadeToBlack: {fileID: 0}
+  _playerHealth: 0
+  _heartIcon1: {fileID: 0}
+  _heartIcon2: {fileID: 0}
+  _heartIcon3: {fileID: 0}
+  _bloodSplatter: {fileID: 0}
+  _timerText: {fileID: 0}
+  _timerPfx: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _scorePFX: {fileID: 0}

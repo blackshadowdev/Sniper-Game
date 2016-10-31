@@ -61,6 +61,8 @@ public class AIControl : MonoBehaviour
 		{
 			_currentWaypoint = _waypoint2;
 		}
+
+		gameObject.SetActive(false);
 	}
 
 
