@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // for text?
+using UnityEngine.UI;
 
 
 public class sceneManager : MonoBehaviour {
@@ -78,7 +78,7 @@ public class sceneManager : MonoBehaviour {
 
 		if (Input.GetKeyDown("f"))
 		{
-			//Fire();
+			Fire();
 			Invoke("TriggerUp", 0.5f);
 		}
 
@@ -205,26 +205,14 @@ public class sceneManager : MonoBehaviour {
 			{
 				if (_hit.transform.tag == "Enemy")
 				{
-					/*
-					for (int _killedEnemy = 0; _killedEnemy < _enemyManagerScript._enemies.Count; _killedEnemy ++)
-					{
-						if (_hit.transform.gameObject == _enemyManagerScript._enemies[_killedEnemy])
-						{
-							_enemyManagerScript._enemies.RemoveAt(_killedEnemy);
-						}
-					}
-					*/
-
 					_enemyManagerScript.KillEnemy (_hit.transform.gameObject);
 					Instantiate(_bloodPfxPrefab, _hit.point, Quaternion.identity);
-					AIControl _enemyController = _hit.transform.GetComponent<AIControl>();
-					_enemyController.Die();
 					_bonusTime += 15;
 					_timerPfx.Emit(50);
 					_playerScore += 250;
 					_scoreText.text = _playerScore.ToString();
 					_scorePFX.Emit(50);
-				} // end of IF HIT ENEMY
+				}
 
 				if (_hit.transform.tag == "Civilian")
 				{
@@ -233,7 +221,7 @@ public class sceneManager : MonoBehaviour {
 					_playerScore -= 500;
 					_scoreText.text = _playerScore.ToString();
 					_scorePFX.Emit(50);
-				} // end of IF HIT CIVILIAN
+				}
 			} else {
 				Debug.Log("Miss!");
 			}
