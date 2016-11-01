@@ -134,7 +134,7 @@ public class AIControl : MonoBehaviour
 	}
 
 
-	public Vector3 getRelativePosition(Transform origin, Vector3 position) {				// used to be public STATIC.... ?
+	public Vector3 getRelativePosition(Transform origin, Vector3 position) {				
 		Vector3 distance = position - origin.position;
 		Vector3 relativePosition = Vector3.zero;
 		relativePosition.x = Vector3.Dot(distance, origin.right.normalized);
