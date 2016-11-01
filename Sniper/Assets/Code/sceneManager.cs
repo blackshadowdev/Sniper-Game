@@ -205,19 +205,18 @@ public class sceneManager : MonoBehaviour {
 			{
 				if (_hit.transform.tag == "Enemy")
 				{
-					
+					/*
 					for (int _killedEnemy = 0; _killedEnemy < _enemyManagerScript._enemies.Count; _killedEnemy ++)
 					{
 						if (_hit.transform.gameObject == _enemyManagerScript._enemies[_killedEnemy])
 						{
 							_enemyManagerScript._enemies.RemoveAt(_killedEnemy);
-							Debug.Log("removing killed " + _killedEnemy);
 						}
 					}
+					*/
 
+					_enemyManagerScript.KillEnemy (_hit.transform.gameObject);
 					Instantiate(_bloodPfxPrefab, _hit.point, Quaternion.identity);
-					//Destroy(_hit.transform.gameObject);
-					//RPGCharacterControllerFREE _enemyController = _hit.transform.GetComponent<RPGCharacterControllerFREE>();
 					AIControl _enemyController = _hit.transform.GetComponent<AIControl>();
 					_enemyController.Die();
 					_bonusTime += 15;
@@ -234,7 +233,7 @@ public class sceneManager : MonoBehaviour {
 					_playerScore -= 500;
 					_scoreText.text = _playerScore.ToString();
 					_scorePFX.Emit(50);
-				}
+				} // end of IF HIT CIVILIAN
 			} else {
 				Debug.Log("Miss!");
 			}
@@ -310,7 +309,6 @@ public class sceneManager : MonoBehaviour {
 		else if (_heartIcon1.enabled)
 		{
 			_heartIcon1.enabled = false;
-			//_bloodSplatter.material.color = new Color(1,1,1,1);
 			if (Application.loadedLevelName == "rifle and npcs")
 				SceneManager.LoadScene("rifle and npcs");
 			if (Application.loadedLevelName == "city 1")
