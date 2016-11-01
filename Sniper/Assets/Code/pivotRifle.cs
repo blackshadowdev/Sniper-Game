@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class pivotRifle : MonoBehaviour {
 
+	#if UNITY_EDITOR
 	public Transform _leftController;
 
 	// Use this for initialization
@@ -14,13 +19,8 @@ public class pivotRifle : MonoBehaviour {
 	void Update () 
 	{
 		transform.LookAt(_leftController);
-
-
-		// simulate Left Controller movement on PC
 		_leftController.Translate(Vector3.right * Input.GetAxis("Mouse X") * 0.1f);
 		_leftController.Translate(Vector3.up * Input.GetAxis("Mouse Y") * 0.1f);
-		// delete when testing is complete
-
-
 	}
+	#endif
 }
