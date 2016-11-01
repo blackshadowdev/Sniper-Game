@@ -1,22 +1,8 @@
-﻿using System.Collections;													// removed to prevent issue with two Randoms
+﻿using System.Collections;													
 using UnityEngine;
-//using UnityStandardAssets.Characters.ThirdPerson;
-
-//[RequireComponent(typeof (NavMeshAgent))]
-//[RequireComponent(typeof (ThirdPersonCharacter))]
-
-
-
-// Notes
-// 1) don't put the strafing enemy's waypoints too far apart, or he get's called by EnemyManager before finishing his action.  Alternatively, you could make the enemy manager not call an activated enemy.
-
-
 
 public class AIControl : MonoBehaviour
 {
-	public NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-
-
 	public Transform _bulletPrefab;
 	public Transform _bulletSpawnPos;
 	public ParticleSystem _muzzleFlashPfx;
@@ -42,17 +28,6 @@ public class AIControl : MonoBehaviour
 
 	private void Start()
 	{
-		// get the components on the object we need ( should not be null due to require component so no need to check )
-		//agent = GetComponentInChildren<NavMeshAgent>();
-		//character = GetComponent<ThirdPersonCharacter>();
-
-		//agent.updateRotation = false;
-		//agent.updatePosition = true;
-
-
-		//_characterController.Crouch();
-		//_animator.SetBool("StrafeLeft", true);
-
 		_animator = transform.GetComponent<Animator>();
 
 		if (_myType == "StandFireCrouch")
