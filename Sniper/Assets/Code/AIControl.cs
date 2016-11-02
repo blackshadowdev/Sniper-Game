@@ -16,7 +16,10 @@ public class AIControl : MonoBehaviour
 
 	private Animator _animator;
 
-	public string _myType;
+	//public string _myType;
+	[SerializeField] private bool _typeCrouch;
+	[SerializeField] private bool _typeStrafe;
+	[SerializeField] private bool _typeBoss;
 
 
 	[SerializeField] private Transform _waypoint1;					
@@ -31,32 +34,36 @@ public class AIControl : MonoBehaviour
 
 	private bool _bossIsEntering;
 	private bool _bossMovingToWaypoint;
+	private int _bossHealth = 3;
 
 	private void Start()
 	{
 		_animator = transform.GetComponent<Animator>();
 		_currentWaypoint = new GameObject();
-		if (_myType == "StandFireCrouch")
+		if (_typeCrouch)
 			_animator.SetTrigger("CrouchTrigger");
-		else if (_myType == "StrafeFireStrafe")
+		else if (_typeStrafe)
 		{
 			_currentWaypoint.transform.position = _waypoint2.transform.position;
-		} else if (_myType == "Boss")
+		} 
+			
+		gameObject.SetActive(false);															// enemies are activated by the spawn manager
+	}
+
+	private void OnEnable ()
+	{
+		if (_typeBoss)
 		{
 			transform.LookAt(_waypoint1);
-			_animator.SetTrigger("WalkTrigger");
+			_animator.SetTrigger("RunTrigger");
 			_bossIsEntering = true;
-			//_currentWaypoint.transform.position = new Vector3(0,0,0);
 		}
-
-		if (_myType != "Boss")
-			gameObject.SetActive(false);															// enemies are activated by the spawn manager
 	}
 
 
 	private void Update()
 	{
-		if (_myType == "StrafeFireStrafe" && _isStrafing)
+		if (_typeStrafe && _isStrafing)
 		{
 
 			// if near target waypoint, stand idle and switch waypoints
@@ -76,7 +83,7 @@ public class AIControl : MonoBehaviour
 					StartCoroutine(PauseTellPauseFire());
 				}
 			}
-		} else if (_myType == "Boss")
+		} else if (_typeBoss)
 		{
 			BossUpdate();
 		}
@@ -86,36 +93,66 @@ public class AIControl : MonoBehaviour
 	{
 		if (!_bossIsEntering)
 		{
-			//if (!_currentWaypoint)
-			//	BossFindNewWaypoint();
 			transform.LookAt(_currentWaypoint.transform.position);
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
-				BossFindNewWaypoint();
+			{
+				int _randBossAction = Random.Range(0,2);
+				if (_randBossAction == 0)
+				{
+					StartCoroutine(BossFireSequence());
+				} else 
+				{
+					BossFindNewWaypoint();
+				}
+			}	
 		}
 
-		if (_bossIsEntering)
+		else if (_bossIsEntering)
 		{
 			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
 			{
 				_bossIsEntering = false;
+				_animator.SetTrigger("SlowWalkTrigger");
 				BossFindNewWaypoint();
 			}
 		}
 	}
 
+	private IEnumerator BossFireSequence ()
+	{
+		_animator.SetTrigger("StandIdleTrigger");
+		yield return new WaitForSeconds(0.5f);
+		transform.LookAt(_player);
+		Fire();
+		yield return new WaitForSeconds(0.5f);
+		BossFindNewWaypoint();
+
+
+		if (_bossHealth == 3)
+		{
+			_animator.SetTrigger("SlowWalkTrigger");
+		}
+		else if (_bossHealth == 2)
+		{
+			_animator.SetTrigger("WalkTrigger");
+		} else if (_bossHealth == 1)
+		{
+			_animator.SetTrigger("RunTrigger");
+		}
+	}
+
 	private void BossFindNewWaypoint ()
 	{
-		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
-		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
+		float _tempX = _waypoint1.position.x + Random.Range(-15,15);
+		float _tempZ = _waypoint1.position.z + Random.Range(-15,15);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
-		Debug.Log("boss new currwaypoint = " + _currentWaypoint);
 	}
 
 	public void TakeAction ()
 	{
-		if (_myType == "StandFireCrouch")
+		if (_typeCrouch)
 			StartCoroutine(StandFireCrouch());
-		else if (_myType == "StrafeFireStrafe")
+		else if (_typeStrafe)
 			StrafeToWaypoint();
 	}
 
@@ -145,7 +182,7 @@ public class AIControl : MonoBehaviour
 		yield return new WaitForSeconds(_timeUntilFire);										// wait
 		Fire();																					// fire
 
-		if (_myType == "StrafeFireStrafe")
+		if (_typeStrafe)
 		{
 			yield return new WaitForSeconds(1);
 			StrafeToWaypoint();
@@ -155,7 +192,7 @@ public class AIControl : MonoBehaviour
 	private IEnumerator StandFireCrouch ()
 	{
 		_animator.SetTrigger("StandIdleTrigger");												// stand up
-		StartCoroutine(PauseTellPauseFire());														// pause, "Tell!", pause
+		StartCoroutine(PauseTellPauseFire());													// pause, "Tell!", pause
 		float _timeUntilCrouch = Random.Range(2.0f, 3.0f);										// [rand]
 		yield return new WaitForSeconds(_timeUntilCrouch);										// wait
 		_animator.SetTrigger("CrouchTrigger");													// crouch
@@ -172,8 +209,26 @@ public class AIControl : MonoBehaviour
 
 	public void Die ()
 	{
-		StopAllCoroutines();
-		_animator.SetTrigger("DeathTrigger");
+		if (!_typeBoss)
+		{
+			StopAllCoroutines();
+			_animator.SetTrigger("DeathTrigger");	
+		} else if (_typeBoss)
+		{
+			_bossHealth--;
+			if (_bossHealth == 2)
+			{
+				_animator.SetTrigger("WalkTrigger");
+			} else if (_bossHealth == 1)
+			{
+				_animator.SetTrigger("RunTrigger");
+			} else if (_bossHealth == 0)
+			{
+				_animator.SetTrigger("DeathTrigger");
+			}
+			BossFindNewWaypoint();
+		}
+
 	}
 
 
