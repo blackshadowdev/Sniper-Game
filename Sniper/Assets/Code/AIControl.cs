@@ -19,8 +19,10 @@ public class AIControl : MonoBehaviour
 	public string _myType;
 
 
-	public Transform _waypiont1;					// start here; shoot here.  (this will reverse when action is triggered by player's first shot)
-	public Transform _waypoint2;					// cover here
+	[SerializeField] private Transform _waypoint1;					
+	[SerializeField] private Transform _waypoint2;
+	[SerializeField] private Transform _waypiont3;					
+	[SerializeField] private Transform _waypoint4;
 	private Transform _currentWaypoint;
 
 	private bool _isStrafing;
@@ -35,9 +37,15 @@ public class AIControl : MonoBehaviour
 		else if (_myType == "StrafeFireStrafe")
 		{
 			_currentWaypoint = _waypoint2;
+		} else if (_myType == "Boss")
+		{
+			//_currentWaypoint = _waypoint1;
+			transform.LookAt(_waypoint1);
+			_animator.SetTrigger("WalkTrigger");
 		}
 
-		gameObject.SetActive(false);
+		if (_myType != "Boss")
+			gameObject.SetActive(false);															// enemies are activated by the spawn manager
 	}
 
 
@@ -53,7 +61,7 @@ public class AIControl : MonoBehaviour
 				_animator.SetTrigger("StandIdleTrigger");
 
 				// if arriving at Waypoint 1, do thiss...
-				if (_currentWaypoint == _waypiont1)
+				if (_currentWaypoint == _waypoint1)
 				{
 					_currentWaypoint = _waypoint2;
 					_imBusy = false;
@@ -61,10 +69,13 @@ public class AIControl : MonoBehaviour
 				// if arriving at Waypoint 2, do this...
 				else
 				{
-					_currentWaypoint = _waypiont1;
+					_currentWaypoint = _waypoint1;
 					StartCoroutine(PauseTellPauseFire());
 				}
 			}
+		} else if (_myType == "Boss")
+		{
+			
 		}
 	} // end of Update()
 
