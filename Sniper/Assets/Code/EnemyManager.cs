@@ -1,29 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic; // so that I can use Lists
+using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour {
 
-	//public GameObject[] _enemies;
 	private float _startTime;
 	private float _elapsedTime;
-	public float _actionTimer;
 	private float _timeLastAction;
-	public AIControl _thisEnemyScript;
-	public List<GameObject> _activeEnemies;
-
-	public List<GameObject> _firstWave;
-	public List<GameObject> _secondWave;
-
-	private bool _firstWaveSpawned;
+	private int _lastWaveSpawned;
+	[SerializeField] private float _actionTimer;
+	[SerializeField] private List<GameObject> _activeEnemies;
+	[SerializeField] private List<GameObject> _firstWave;
+	[SerializeField] private List<GameObject> _secondWave;
 
 
-	// Use this for initialization
+
+
 	void Start () {
-		//SpawnWave(_firstWave);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 		if (Time.time - _timeLastAction > _actionTimer)
@@ -31,10 +26,10 @@ public class EnemyManager : MonoBehaviour {
 			TakeAction();
 		}
 
-		if (Time.time - _startTime > 1 && !_firstWaveSpawned)
+		if (Time.time - _startTime > 1 && _lastWaveSpawned == 0)
 		{
 			SpawnWave(_firstWave);
-			_firstWaveSpawned = true;
+			_lastWaveSpawned = 1;
 		}
 
 	}
@@ -42,18 +37,15 @@ public class EnemyManager : MonoBehaviour {
 	private void TakeAction ()
 	{
 		_timeLastAction = Time.time;
-		GameObject _thisEnemy;
-		_thisEnemy = _activeEnemies[Random.Range(0, _activeEnemies.Count)];
-		_thisEnemyScript = _thisEnemy.GetComponent<AIControl>();
+		AIControl _thisEnemyScript = _activeEnemies[Random.Range(0, _activeEnemies.Count)].GetComponent<AIControl>();
 		if (_thisEnemyScript._imBusy == false)
-		_thisEnemyScript.TakeAction();
+			_thisEnemyScript.TakeAction();
 	}
 
 	private void SpawnWave (List<GameObject> _thisWave)
 	{
 		for (int i = 0; i < _thisWave.Count; i ++)
 		{
-			Debug.Log("spawnwave called");
 			_thisWave[i].SetActive(true);
 			_activeEnemies.Add(_thisWave [i]);
 		}
@@ -61,17 +53,12 @@ public class EnemyManager : MonoBehaviour {
 
 	public void KillEnemy (GameObject _hitEnemy)
 	{
-		Debug.Log ("kıll enemy called");
-		for (int _killedEnemy = 0; _killedEnemy < _activeEnemies.Count; _killedEnemy ++)
+		_hitEnemy.GetComponent<AIControl>().Die();
+		_activeEnemies.Remove(_hitEnemy);
+		if (_activeEnemies.Count == 0 && _lastWaveSpawned == 1)
 		{
-			if (_hitEnemy.transform.gameObject == _activeEnemies[_killedEnemy])
-			{
-				_activeEnemies.RemoveAt(_killedEnemy);
-				if (_activeEnemies.Count == 0) 
-				{
-					SpawnWave (_secondWave);
-				}
-			}
+			SpawnWave(_secondWave);
+			_lastWaveSpawned = 2;
 		}
 	}
 }

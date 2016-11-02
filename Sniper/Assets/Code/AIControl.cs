@@ -1,22 +1,8 @@
-﻿using System.Collections;													// removed to prevent issue with two Randoms
+﻿using System.Collections;													
 using UnityEngine;
-//using UnityStandardAssets.Characters.ThirdPerson;
-
-//[RequireComponent(typeof (NavMeshAgent))]
-//[RequireComponent(typeof (ThirdPersonCharacter))]
-
-
-
-// Notes
-// 1) don't put the strafing enemy's waypoints too far apart, or he get's called by EnemyManager before finishing his action.  Alternatively, you could make the enemy manager not call an activated enemy.
-
-
 
 public class AIControl : MonoBehaviour
 {
-	public NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-
-
 	public Transform _bulletPrefab;
 	public Transform _bulletSpawnPos;
 	public ParticleSystem _muzzleFlashPfx;
@@ -30,45 +16,54 @@ public class AIControl : MonoBehaviour
 
 	private Animator _animator;
 
-	public string _myType;
+	//public string _myType;
+	[SerializeField] private bool _typeCrouch;
+	[SerializeField] private bool _typeStrafe;
+	[SerializeField] private bool _typeBoss;
 
 
-	public Transform _waypiont1;					// start here; shoot here.  (this will reverse when action is triggered by player's first shot)
-	public Transform _waypoint2;					// cover here
-	private Transform _currentWaypoint;
+	[SerializeField] private Transform _waypoint1;					
+	[SerializeField] private Transform _waypoint2;
+	[SerializeField] private Transform _waypiont3;					
+	[SerializeField] private Transform _waypoint4;
+	//private Transform _currentWaypoint;
+	private GameObject _currentWaypoint;
 
 	private bool _isStrafing;
 	public bool _imBusy;
 
+	private bool _bossIsEntering;
+	private bool _bossMovingToWaypoint;
+	private int _bossHealth = 3;
+
 	private void Start()
 	{
-		// get the components on the object we need ( should not be null due to require component so no need to check )
-		//agent = GetComponentInChildren<NavMeshAgent>();
-		//character = GetComponent<ThirdPersonCharacter>();
-
-		//agent.updateRotation = false;
-		//agent.updatePosition = true;
-
-
-		//_characterController.Crouch();
-		//_animator.SetBool("StrafeLeft", true);
-
 		_animator = transform.GetComponent<Animator>();
-
-		if (_myType == "StandFireCrouch")
+		_currentWaypoint = new GameObject();
+		if (_typeCrouch)
 			_animator.SetTrigger("CrouchTrigger");
-		else if (_myType == "StrafeFireStrafe")
+		else if (_typeStrafe)
 		{
-			_currentWaypoint = _waypoint2;
-		}
+			_currentWaypoint.transform.position = _waypoint2.transform.position;
+		} 
+			
+		gameObject.SetActive(false);															// enemies are activated by the spawn manager
+	}
 
-		gameObject.SetActive(false);
+	private void OnEnable ()
+	{
+		if (_typeBoss)
+		{
+			transform.LookAt(_waypoint1);
+			_animator.SetTrigger("RunTrigger");
+			_bossIsEntering = true;
+		}
 	}
 
 
 	private void Update()
 	{
-		if (_myType == "StrafeFireStrafe" && _isStrafing)
+		if (_typeStrafe && _isStrafing)
 		{
 
 			// if near target waypoint, stand idle and switch waypoints
@@ -77,27 +72,87 @@ public class AIControl : MonoBehaviour
 				_isStrafing = false;
 				_animator.SetTrigger("StandIdleTrigger");
 
-				// if arriving at Waypoint 1, do thiss...
-				if (_currentWaypoint == _waypiont1)
+				if (_currentWaypoint == _waypoint1)
 				{
-					_currentWaypoint = _waypoint2;
+					_currentWaypoint.transform.position = _waypoint2.transform.position;
 					_imBusy = false;
 				}
-				// if arriving at Waypoint 2, do this...
 				else
 				{
-					_currentWaypoint = _waypiont1;
+					_currentWaypoint.transform.position = _waypoint1.transform.position;
 					StartCoroutine(PauseTellPauseFire());
 				}
 			}
+		} else if (_typeBoss)
+		{
+			BossUpdate();
 		}
-	} // end of Update()
+	}
+
+	private void BossUpdate ()
+	{
+		if (!_bossIsEntering)
+		{
+			transform.LookAt(_currentWaypoint.transform.position);
+			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
+			{
+				int _randBossAction = Random.Range(0,2);
+				if (_randBossAction == 0)
+				{
+					StartCoroutine(BossFireSequence());
+				} else 
+				{
+					BossFindNewWaypoint();
+				}
+			}	
+		}
+
+		else if (_bossIsEntering)
+		{
+			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
+			{
+				_bossIsEntering = false;
+				_animator.SetTrigger("SlowWalkTrigger");
+				BossFindNewWaypoint();
+			}
+		}
+	}
+
+	private IEnumerator BossFireSequence ()
+	{
+		_animator.SetTrigger("StandIdleTrigger");
+		yield return new WaitForSeconds(0.5f);
+		transform.LookAt(_player);
+		Fire();
+		yield return new WaitForSeconds(0.5f);
+		BossFindNewWaypoint();
+
+
+		if (_bossHealth == 3)
+		{
+			_animator.SetTrigger("SlowWalkTrigger");
+		}
+		else if (_bossHealth == 2)
+		{
+			_animator.SetTrigger("WalkTrigger");
+		} else if (_bossHealth == 1)
+		{
+			_animator.SetTrigger("RunTrigger");
+		}
+	}
+
+	private void BossFindNewWaypoint ()
+	{
+		float _tempX = _waypoint1.position.x + Random.Range(-15,15);
+		float _tempZ = _waypoint1.position.z + Random.Range(-15,15);
+		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
+	}
 
 	public void TakeAction ()
 	{
-		if (_myType == "StandFireCrouch")
+		if (_typeCrouch)
 			StartCoroutine(StandFireCrouch());
-		else if (_myType == "StrafeFireStrafe")
+		else if (_typeStrafe)
 			StrafeToWaypoint();
 	}
 
@@ -127,7 +182,7 @@ public class AIControl : MonoBehaviour
 		yield return new WaitForSeconds(_timeUntilFire);										// wait
 		Fire();																					// fire
 
-		if (_myType == "StrafeFireStrafe")
+		if (_typeStrafe)
 		{
 			yield return new WaitForSeconds(1);
 			StrafeToWaypoint();
@@ -137,7 +192,7 @@ public class AIControl : MonoBehaviour
 	private IEnumerator StandFireCrouch ()
 	{
 		_animator.SetTrigger("StandIdleTrigger");												// stand up
-		StartCoroutine(PauseTellPauseFire());														// pause, "Tell!", pause
+		StartCoroutine(PauseTellPauseFire());													// pause, "Tell!", pause
 		float _timeUntilCrouch = Random.Range(2.0f, 3.0f);										// [rand]
 		yield return new WaitForSeconds(_timeUntilCrouch);										// wait
 		_animator.SetTrigger("CrouchTrigger");													// crouch
@@ -154,12 +209,30 @@ public class AIControl : MonoBehaviour
 
 	public void Die ()
 	{
-		StopAllCoroutines();
-		_animator.SetTrigger("DeathTrigger");
+		if (!_typeBoss)
+		{
+			StopAllCoroutines();
+			_animator.SetTrigger("DeathTrigger");	
+		} else if (_typeBoss)
+		{
+			_bossHealth--;
+			if (_bossHealth == 2)
+			{
+				_animator.SetTrigger("WalkTrigger");
+			} else if (_bossHealth == 1)
+			{
+				_animator.SetTrigger("RunTrigger");
+			} else if (_bossHealth == 0)
+			{
+				_animator.SetTrigger("DeathTrigger");
+			}
+			BossFindNewWaypoint();
+		}
+
 	}
 
 
-	public Vector3 getRelativePosition(Transform origin, Vector3 position) {				// used to be public STATIC.... ?
+	public Vector3 getRelativePosition(Transform origin, Vector3 position) {				
 		Vector3 distance = position - origin.position;
 		Vector3 relativePosition = Vector3.zero;
 		relativePosition.x = Vector3.Dot(distance, origin.right.normalized);

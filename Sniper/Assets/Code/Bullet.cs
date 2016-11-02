@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	public float _speed;
-	public Transform _hitCoverPrefab;
+	[SerializeField] private float _speed;
+	[SerializeField] private Transform _hitCoverPrefab;
 
 	// Use this for initialization
 	void Start () {
