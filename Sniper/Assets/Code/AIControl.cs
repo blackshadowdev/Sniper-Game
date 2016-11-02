@@ -45,14 +45,8 @@ public class AIControl : MonoBehaviour
 		else if (_typeStrafe)
 		{
 			_currentWaypoint.transform.position = _waypoint2.transform.position;
-		} else if (_typeBoss)
-		{
-			//transform.LookAt(_waypoint1);
-			//_animator.SetTrigger("RunTrigger");
-			//_bossIsEntering = true;
-		}
-
-
+		} 
+			
 		gameObject.SetActive(false);															// enemies are activated by the spawn manager
 	}
 
@@ -99,13 +93,21 @@ public class AIControl : MonoBehaviour
 	{
 		if (!_bossIsEntering)
 		{
-			
 			transform.LookAt(_currentWaypoint.transform.position);
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
-				BossFindNewWaypoint();
+			{
+				int _randBossAction = Random.Range(0,2);
+				if (_randBossAction == 0)
+				{
+					StartCoroutine(BossFireSequence());
+				} else 
+				{
+					BossFindNewWaypoint();
+				}
+			}	
 		}
 
-		if (_bossIsEntering)
+		else if (_bossIsEntering)
 		{
 			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
 			{
@@ -113,6 +115,29 @@ public class AIControl : MonoBehaviour
 				_animator.SetTrigger("SlowWalkTrigger");
 				BossFindNewWaypoint();
 			}
+		}
+	}
+
+	private IEnumerator BossFireSequence ()
+	{
+		_animator.SetTrigger("StandIdleTrigger");
+		yield return new WaitForSeconds(0.5f);
+		transform.LookAt(_player);
+		Fire();
+		yield return new WaitForSeconds(0.5f);
+		BossFindNewWaypoint();
+
+
+		if (_bossHealth == 3)
+		{
+			_animator.SetTrigger("SlowWalkTrigger");
+		}
+		else if (_bossHealth == 2)
+		{
+			_animator.SetTrigger("WalkTrigger");
+		} else if (_bossHealth == 1)
+		{
+			_animator.SetTrigger("RunTrigger");
 		}
 	}
 
@@ -167,7 +192,7 @@ public class AIControl : MonoBehaviour
 	private IEnumerator StandFireCrouch ()
 	{
 		_animator.SetTrigger("StandIdleTrigger");												// stand up
-		StartCoroutine(PauseTellPauseFire());														// pause, "Tell!", pause
+		StartCoroutine(PauseTellPauseFire());													// pause, "Tell!", pause
 		float _timeUntilCrouch = Random.Range(2.0f, 3.0f);										// [rand]
 		yield return new WaitForSeconds(_timeUntilCrouch);										// wait
 		_animator.SetTrigger("CrouchTrigger");													// crouch
