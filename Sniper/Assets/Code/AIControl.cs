@@ -34,6 +34,7 @@ public class AIControl : MonoBehaviour
 
 	private bool _bossIsEntering;
 	private bool _bossMovingToWaypoint;
+	private int _bossHealth;
 
 	private void Start()
 	{
@@ -47,7 +48,7 @@ public class AIControl : MonoBehaviour
 		} else if (_typeBoss)
 		{
 			transform.LookAt(_waypoint1);
-			_animator.SetTrigger("WalkTrigger");
+			_animator.SetTrigger("RunTrigger");
 			_bossIsEntering = true;
 			//_currentWaypoint.transform.position = new Vector3(0,0,0);
 		}
@@ -89,8 +90,7 @@ public class AIControl : MonoBehaviour
 	{
 		if (!_bossIsEntering)
 		{
-			//if (!_currentWaypoint)
-			//	BossFindNewWaypoint();
+			
 			transform.LookAt(_currentWaypoint.transform.position);
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
 				BossFindNewWaypoint();
@@ -101,6 +101,7 @@ public class AIControl : MonoBehaviour
 			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
 			{
 				_bossIsEntering = false;
+				_animator.SetTrigger("SlowWalkTrigger");
 				BossFindNewWaypoint();
 			}
 		}
@@ -174,8 +175,28 @@ public class AIControl : MonoBehaviour
 
 	public void Die ()
 	{
-		StopAllCoroutines();
-		_animator.SetTrigger("DeathTrigger");
+		if (!_typeBoss)
+		{
+			StopAllCoroutines();
+			_animator.SetTrigger("DeathTrigger");	
+		} else if (_typeBoss)
+		{
+			if (_bossHealth == 0)
+			{
+				_animator.SetTrigger("WalkTrigger");
+			} else if (_bossHealth == 1)
+			{
+				_animator.SetTrigger("RunTrigger");
+			} else if (_bossHealth == 2)
+			{
+				_animator.SetTrigger("SlowWalkTrigger");
+			}
+			_bossHealth++;
+			if (_bossHealth > 2)
+				_bossHealth = 0;
+			Debug.Log("boss hit, health = " + _bossHealth);
+		}
+
 	}
 
 
