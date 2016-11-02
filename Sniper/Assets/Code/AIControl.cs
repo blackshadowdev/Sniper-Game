@@ -19,25 +19,38 @@ public class AIControl : MonoBehaviour
 	public string _myType;
 
 
-	public Transform _waypiont1;					// start here; shoot here.  (this will reverse when action is triggered by player's first shot)
-	public Transform _waypoint2;					// cover here
-	private Transform _currentWaypoint;
+	[SerializeField] private Transform _waypoint1;					
+	[SerializeField] private Transform _waypoint2;
+	[SerializeField] private Transform _waypiont3;					
+	[SerializeField] private Transform _waypoint4;
+	//private Transform _currentWaypoint;
+	private GameObject _currentWaypoint;
 
 	private bool _isStrafing;
 	public bool _imBusy;
 
+	private bool _bossIsEntering;
+	private bool _bossMovingToWaypoint;
+
 	private void Start()
 	{
 		_animator = transform.GetComponent<Animator>();
-
+		_currentWaypoint = new GameObject();
 		if (_myType == "StandFireCrouch")
 			_animator.SetTrigger("CrouchTrigger");
 		else if (_myType == "StrafeFireStrafe")
 		{
-			_currentWaypoint = _waypoint2;
+			_currentWaypoint.transform.position = _waypoint2.transform.position;
+		} else if (_myType == "Boss")
+		{
+			transform.LookAt(_waypoint1);
+			_animator.SetTrigger("WalkTrigger");
+			_bossIsEntering = true;
+			//_currentWaypoint.transform.position = new Vector3(0,0,0);
 		}
 
-		gameObject.SetActive(false);
+		if (_myType != "Boss")
+			gameObject.SetActive(false);															// enemies are activated by the spawn manager
 	}
 
 
@@ -52,21 +65,51 @@ public class AIControl : MonoBehaviour
 				_isStrafing = false;
 				_animator.SetTrigger("StandIdleTrigger");
 
-				// if arriving at Waypoint 1, do thiss...
-				if (_currentWaypoint == _waypiont1)
+				if (_currentWaypoint == _waypoint1)
 				{
-					_currentWaypoint = _waypoint2;
+					_currentWaypoint.transform.position = _waypoint2.transform.position;
 					_imBusy = false;
 				}
-				// if arriving at Waypoint 2, do this...
 				else
 				{
-					_currentWaypoint = _waypiont1;
+					_currentWaypoint.transform.position = _waypoint1.transform.position;
 					StartCoroutine(PauseTellPauseFire());
 				}
 			}
+		} else if (_myType == "Boss")
+		{
+			BossUpdate();
 		}
-	} // end of Update()
+	}
+
+	private void BossUpdate ()
+	{
+		if (!_bossIsEntering)
+		{
+			//if (!_currentWaypoint)
+			//	BossFindNewWaypoint();
+			transform.LookAt(_currentWaypoint.transform.position);
+			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
+				BossFindNewWaypoint();
+		}
+
+		if (_bossIsEntering)
+		{
+			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
+			{
+				_bossIsEntering = false;
+				BossFindNewWaypoint();
+			}
+		}
+	}
+
+	private void BossFindNewWaypoint ()
+	{
+		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
+		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
+		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
+		Debug.Log("boss new currwaypoint = " + _currentWaypoint);
+	}
 
 	public void TakeAction ()
 	{
