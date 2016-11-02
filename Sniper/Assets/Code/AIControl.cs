@@ -16,7 +16,10 @@ public class AIControl : MonoBehaviour
 
 	private Animator _animator;
 
-	public string _myType;
+	//public string _myType;
+	[SerializeField] private bool _typeCrouch;
+	[SerializeField] private bool _typeStrafe;
+	[SerializeField] private bool _typeBoss;
 
 
 	[SerializeField] private Transform _waypoint1;					
@@ -36,12 +39,12 @@ public class AIControl : MonoBehaviour
 	{
 		_animator = transform.GetComponent<Animator>();
 		_currentWaypoint = new GameObject();
-		if (_myType == "StandFireCrouch")
+		if (_typeCrouch)
 			_animator.SetTrigger("CrouchTrigger");
-		else if (_myType == "StrafeFireStrafe")
+		else if (_typeStrafe)
 		{
 			_currentWaypoint.transform.position = _waypoint2.transform.position;
-		} else if (_myType == "Boss")
+		} else if (_typeBoss)
 		{
 			transform.LookAt(_waypoint1);
 			_animator.SetTrigger("WalkTrigger");
@@ -49,14 +52,14 @@ public class AIControl : MonoBehaviour
 			//_currentWaypoint.transform.position = new Vector3(0,0,0);
 		}
 
-		if (_myType != "Boss")
+		if (!_typeBoss)
 			gameObject.SetActive(false);															// enemies are activated by the spawn manager
 	}
 
 
 	private void Update()
 	{
-		if (_myType == "StrafeFireStrafe" && _isStrafing)
+		if (_typeStrafe && _isStrafing)
 		{
 
 			// if near target waypoint, stand idle and switch waypoints
@@ -76,7 +79,7 @@ public class AIControl : MonoBehaviour
 					StartCoroutine(PauseTellPauseFire());
 				}
 			}
-		} else if (_myType == "Boss")
+		} else if (_typeBoss)
 		{
 			BossUpdate();
 		}
@@ -108,14 +111,13 @@ public class AIControl : MonoBehaviour
 		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
 		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
-		Debug.Log("boss new currwaypoint = " + _currentWaypoint);
 	}
 
 	public void TakeAction ()
 	{
-		if (_myType == "StandFireCrouch")
+		if (_typeCrouch)
 			StartCoroutine(StandFireCrouch());
-		else if (_myType == "StrafeFireStrafe")
+		else if (_typeStrafe)
 			StrafeToWaypoint();
 	}
 
@@ -145,7 +147,7 @@ public class AIControl : MonoBehaviour
 		yield return new WaitForSeconds(_timeUntilFire);										// wait
 		Fire();																					// fire
 
-		if (_myType == "StrafeFireStrafe")
+		if (_typeStrafe)
 		{
 			yield return new WaitForSeconds(1);
 			StrafeToWaypoint();
