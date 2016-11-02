@@ -34,7 +34,7 @@ public class AIControl : MonoBehaviour
 
 	private bool _bossIsEntering;
 	private bool _bossMovingToWaypoint;
-	private int _bossHealth;
+	private int _bossHealth = 3;
 
 	private void Start()
 	{
@@ -47,14 +47,23 @@ public class AIControl : MonoBehaviour
 			_currentWaypoint.transform.position = _waypoint2.transform.position;
 		} else if (_typeBoss)
 		{
+			//transform.LookAt(_waypoint1);
+			//_animator.SetTrigger("RunTrigger");
+			//_bossIsEntering = true;
+		}
+
+
+		gameObject.SetActive(false);															// enemies are activated by the spawn manager
+	}
+
+	private void OnEnable ()
+	{
+		if (_typeBoss)
+		{
 			transform.LookAt(_waypoint1);
 			_animator.SetTrigger("RunTrigger");
 			_bossIsEntering = true;
-			//_currentWaypoint.transform.position = new Vector3(0,0,0);
 		}
-
-		if (!_typeBoss)
-			gameObject.SetActive(false);															// enemies are activated by the spawn manager
 	}
 
 
@@ -109,8 +118,8 @@ public class AIControl : MonoBehaviour
 
 	private void BossFindNewWaypoint ()
 	{
-		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
-		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
+		float _tempX = _waypoint1.position.x + Random.Range(-15,15);
+		float _tempZ = _waypoint1.position.z + Random.Range(-15,15);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
 	}
 
@@ -181,20 +190,18 @@ public class AIControl : MonoBehaviour
 			_animator.SetTrigger("DeathTrigger");	
 		} else if (_typeBoss)
 		{
-			if (_bossHealth == 0)
+			_bossHealth--;
+			if (_bossHealth == 2)
 			{
 				_animator.SetTrigger("WalkTrigger");
 			} else if (_bossHealth == 1)
 			{
 				_animator.SetTrigger("RunTrigger");
-			} else if (_bossHealth == 2)
+			} else if (_bossHealth == 0)
 			{
-				_animator.SetTrigger("SlowWalkTrigger");
+				_animator.SetTrigger("DeathTrigger");
 			}
-			_bossHealth++;
-			if (_bossHealth > 2)
-				_bossHealth = 0;
-			Debug.Log("boss hit, health = " + _bossHealth);
+			BossFindNewWaypoint();
 		}
 
 	}
