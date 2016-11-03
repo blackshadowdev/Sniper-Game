@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Mert/StartMenu.unity
   - enabled: 1
     path: Assets/Scenes/Mert/MissionBriefing.unity
+  - enabled: 1
+    path: Assets/Mission 1 Briefing.unity
