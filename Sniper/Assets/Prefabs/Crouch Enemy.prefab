@@ -454,11 +454,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012990966538}
-  - 114: {fileID: 114000010436045738}
   - 95: {fileID: 95000011357326464}
   - 54: {fileID: 54000012026602014}
   - 136: {fileID: 136000011211088708}
   - 114: {fileID: 114000014101013018}
+  - 114: {fileID: 114000014212675446}
+  - 82: {fileID: 82000014092995816}
   m_Layer: 0
   m_Name: Crouch Enemy
   m_TagString: Enemy
@@ -1482,10 +1483,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012069098764}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 6.27, y: 0, z: 25.34}
+  m_LocalRotation: {x: -0, y: 0.36108902, z: -0, w: -0.93253136}
+  m_LocalPosition: {x: -98.88, y: 36.377785, z: -3.05}
   m_LocalScale: {x: 0.6641948, y: 0.66419494, z: 0.66419494}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 317.549, z: 0}
   m_Children:
   - {fileID: 4000011438024642}
   - {fileID: 4000010234813970}
@@ -1741,6 +1742,80 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!82 &82000014092995816
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012069098764}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95000011357326464
 Animator:
   serializedVersion: 3
@@ -1758,29 +1833,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010436045738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012069098764}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad159c285c6e6ae4caa1641e7eff37c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  sceneCamera: {fileID: 0}
-  gravity: -9.8
-  jumpSpeed: 9
-  doublejumpSpeed: 10
-  inAirSpeed: 8
-  rollSpeed: 8
-  rollduration: 0.5
-  walkSpeed: 2
-  runSpeed: 8
-  knockbackMultiplier: 7
-  _crouch: 1
 --- !u!114 &114000014101013018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1801,10 +1853,32 @@ MonoBehaviour:
   _tellAudioClip: {fileID: 8300000, guid: 02a0e6f9f7a4648cfbf5bfeadef50cba, type: 3}
   _player: {fileID: 0}
   _isAlive: 1
-  _myType: StandFireCrouch
-  _waypiont1: {fileID: 0}
+  _typeCrouch: 1
+  _typeStrafe: 0
+  _typeBoss: 0
+  _waypoint1: {fileID: 0}
   _waypoint2: {fileID: 0}
+  _waypiont3: {fileID: 0}
+  _waypoint4: {fileID: 0}
   _imBusy: 0
+--- !u!114 &114000014212675446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012069098764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6e40e62b48a4631aab0087ab6ffa36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletSpawnPos: {fileID: 4000012661107876}
+  _bulletPrefab: {fileID: 4000010170401598, guid: 5281b895dec1d433cbe5ef1f4e73ebf7,
+    type: 2}
+  _muzzleFlashPfx: {fileID: 198000012421072392}
+  _gunAudioSource: {fileID: 82000013147356860}
+  _gunAudioClip: {fileID: 8300000, guid: 3cb2b080b84cf401c8e722839ad82296, type: 3}
+  _player: {fileID: 0}
 --- !u!136 &136000011211088708
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1918,7 +1992,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012397953226}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 3
   startDelay:
     scalar: 0
@@ -1956,12 +2030,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 4232925113
   looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: -62042183
   InitialModule:
     serializedVersion: 2
     enabled: 1

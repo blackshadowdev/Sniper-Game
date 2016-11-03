@@ -63,6 +63,7 @@
      <Compile Include="Assets\AssetPacks\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
      <Compile Include="Assets\Code\AIControl.cs" />
      <Compile Include="Assets\Code\Bullet.cs" />
+     <Compile Include="Assets\Code\BulletSpawner.cs" />
      <Compile Include="Assets\Code\CivilianAI.cs" />
      <Compile Include="Assets\Code\EnemyManager.cs" />
      <Compile Include="Assets\Code\Mert\Laser.cs" />

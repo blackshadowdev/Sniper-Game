@@ -38,7 +38,7 @@ public class EnemyManager : MonoBehaviour {
 	{
 		_timeLastAction = Time.time;
 		AIControl _thisEnemyScript = _activeEnemies[Random.Range(0, _activeEnemies.Count)].GetComponent<AIControl>();
-		if (_thisEnemyScript._imBusy == false)
+		//if (_thisEnemyScript._imBusy == false)
 			_thisEnemyScript.TakeAction();
 	}
 
