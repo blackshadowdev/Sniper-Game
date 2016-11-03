@@ -3,42 +3,37 @@ using UnityEngine;
 
 public class AIControl : MonoBehaviour
 {
-	public Transform _bulletPrefab;
-	public Transform _bulletSpawnPos;
-	public ParticleSystem _muzzleFlashPfx;
-	public AudioSource _gunAudioSource;
-	public AudioClip _gunAudioclip;
-	public AudioClip _tellAudioClip;
-	public Transform _player;
-
-	private bool _shouldCrouch = true;
-	public bool _isAlive = true;
-
-	private Animator _animator;
-
-	//public string _myType;
+	
+	[SerializeField] private AudioClip _tellAudioClip;
+	[SerializeField] private Transform _player;
 	[SerializeField] private bool _typeCrouch;
 	[SerializeField] private bool _typeStrafe;
 	[SerializeField] private bool _typeBoss;
-
 
 	[SerializeField] private Transform _waypoint1;					
 	[SerializeField] private Transform _waypoint2;
 	[SerializeField] private Transform _waypiont3;					
 	[SerializeField] private Transform _waypoint4;
-	//private Transform _currentWaypoint;
 	private GameObject _currentWaypoint;
 
+	private bool _shouldCrouch = true;
+	private bool _isAlive = true;
 	private bool _isStrafing;
-	public bool _imBusy;
+	private bool _imBusy;
 
 	private bool _bossIsEntering;
 	private bool _bossMovingToWaypoint;
 	private int _bossHealth = 3;
 
+	private BulletSpawner _bulletSpawner;
+	private AudioSource _audioSource;
+	private Animator _animator;
+
 	private void Start()
 	{
 		_animator = transform.GetComponent<Animator>();
+		_bulletSpawner = transform.GetComponent<BulletSpawner>();
+		_audioSource = transform.GetComponent<AudioSource>();
 		_currentWaypoint = new GameObject();
 		if (_typeCrouch)
 			_animator.SetTrigger("CrouchTrigger");
@@ -150,10 +145,13 @@ public class AIControl : MonoBehaviour
 
 	public void TakeAction ()
 	{
-		if (_typeCrouch)
-			StartCoroutine(StandFireCrouch());
-		else if (_typeStrafe)
-			StrafeToWaypoint();
+		if (!_imBusy)
+		{
+			if (_typeCrouch)
+				StartCoroutine(StandFireCrouch());
+			else if (_typeStrafe)
+				StrafeToWaypoint();
+		}
 	}
 
 	public void StrafeToWaypoint ()
@@ -177,7 +175,7 @@ public class AIControl : MonoBehaviour
 	private IEnumerator PauseTellPauseFire ()
 	{
 		yield return new WaitForSeconds(0.2f);													// wait
-		_gunAudioSource.PlayOneShot(_tellAudioClip);											// "TELL!"
+		_audioSource.PlayOneShot(_tellAudioClip);												// "TELL!"
 		float _timeUntilFire = Random.Range(2.0f, 3.0f);										// [rand]
 		yield return new WaitForSeconds(_timeUntilFire);										// wait
 		Fire();																					// fire
@@ -201,10 +199,7 @@ public class AIControl : MonoBehaviour
 
 	public void Fire ()
 	{
-		_bulletSpawnPos.LookAt(_player);														// aim
-		Instantiate(_bulletPrefab, _bulletSpawnPos.position, _bulletSpawnPos.rotation);			// spawn bullet
-		_muzzleFlashPfx.Emit(10);																// muzzle flash PFX
-		_gunAudioSource.PlayOneShot(_gunAudioclip);												// gunshot audio
+		_bulletSpawner.Fire();
 	}
 
 	public void Die ()
