@@ -61,6 +61,7 @@
      <Compile Include="Assets\AssetPacks\MCP\scripts\Filmic.cs" />
      <Compile Include="Assets\AssetPacks\RPG Character Animation Pack\Code\CameraController.cs" />
      <Compile Include="Assets\AssetPacks\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
+     <Compile Include="Assets\AssetPacks\_Creepy_Cat\_3D Cartoon Level Pack Vol 1\_Scripts\Waypoint.cs" />
      <Compile Include="Assets\Code\AIControl.cs" />
      <Compile Include="Assets\Code\Bullet.cs" />
      <Compile Include="Assets\Code\BulletSpawner.cs" />
