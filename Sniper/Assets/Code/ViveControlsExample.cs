@@ -16,6 +16,7 @@ public class ViveControlsExample : MonoBehaviour {
     private MenuManager _menuManager;
 	public string _leftOrRight;
     public Laser _laser;
+	[SerializeField] private SpotterTool _spotterTool;
 
 
 	// Use this for initialization
@@ -72,6 +73,11 @@ public class ViveControlsExample : MonoBehaviour {
 				}
 			}
             _sceneManager.Fire();
+		}
+
+		if (_leftOrRight == "left")
+		{
+			_spotterTool.ActivateSpotter();
 		}
 	}
 

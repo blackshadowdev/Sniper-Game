@@ -1844,15 +1844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccd3d333bfee46608606a8116601480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 4000010170401598, guid: 5281b895dec1d433cbe5ef1f4e73ebf7,
-    type: 2}
-  _bulletSpawnPos: {fileID: 4000012661107876}
-  _muzzleFlashPfx: {fileID: 198000012421072392}
-  _gunAudioSource: {fileID: 82000013147356860}
-  _gunAudioclip: {fileID: 8300000, guid: 3cb2b080b84cf401c8e722839ad82296, type: 3}
   _tellAudioClip: {fileID: 8300000, guid: 02a0e6f9f7a4648cfbf5bfeadef50cba, type: 3}
   _player: {fileID: 0}
-  _isAlive: 1
   _typeCrouch: 1
   _typeStrafe: 0
   _typeBoss: 0
@@ -1860,7 +1853,6 @@ MonoBehaviour:
   _waypoint2: {fileID: 0}
   _waypiont3: {fileID: 0}
   _waypoint4: {fileID: 0}
-  _imBusy: 0
 --- !u!114 &114000014212675446
 MonoBehaviour:
   m_ObjectHideFlags: 1
