@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour {
 	private float _timeLastAction;
 	private int _lastWaveSpawned;
 	[SerializeField] private float _actionTimer;
-	[SerializeField] private List<GameObject> _activeEnemies;
+	public List<GameObject> _activeEnemies;							// made this public so that SpotterTool can access it.
 	[SerializeField] private List<GameObject> _firstWave;
 	[SerializeField] private List<GameObject> _secondWave;
 
@@ -38,8 +38,7 @@ public class EnemyManager : MonoBehaviour {
 	{
 		_timeLastAction = Time.time;
 		AIControl _thisEnemyScript = _activeEnemies[Random.Range(0, _activeEnemies.Count)].GetComponent<AIControl>();
-		//if (_thisEnemyScript._imBusy == false)
-			_thisEnemyScript.TakeAction();
+		_thisEnemyScript.TakeAction();
 	}
 
 	private void SpawnWave (List<GameObject> _thisWave)
