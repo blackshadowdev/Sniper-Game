@@ -35,9 +35,8 @@ public class AIControl : MonoBehaviour
 		_bulletSpawner = transform.GetComponent<BulletSpawner>();
 		_audioSource = transform.GetComponent<AudioSource>();
 		_currentWaypoint = new GameObject();
-		if (_typeCrouch)
-			_animator.SetTrigger("CrouchTrigger");
-		else if (_typeStrafe)
+
+		if (_typeStrafe)
 		{
 			_currentWaypoint.transform.position = _waypoint2.transform.position;
 		} 
@@ -53,6 +52,9 @@ public class AIControl : MonoBehaviour
 			_animator.SetTrigger("RunTrigger");
 			_bossIsEntering = true;
 		}
+
+		if (_typeCrouch)
+			_animator.SetTrigger("CrouchTrigger");												// these 2 triggers cause an error, but still function.  Object reference not set to an instance of an object.
 	}
 
 
@@ -65,9 +67,11 @@ public class AIControl : MonoBehaviour
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
 			{
 				_isStrafing = false;
+				_animator.ResetTrigger("StrafeLeft");
+				_animator.ResetTrigger("StrafeRight");
 				_animator.SetTrigger("StandIdleTrigger");
 
-				if (_currentWaypoint == _waypoint1)
+				if (_currentWaypoint.transform.position == _waypoint1.transform.position)
 				{
 					_currentWaypoint.transform.position = _waypoint2.transform.position;
 					_imBusy = false;
@@ -148,7 +152,11 @@ public class AIControl : MonoBehaviour
 		if (!_imBusy)
 		{
 			if (_typeCrouch)
+			{
 				StartCoroutine(StandFireCrouch());
+				_imBusy = true;
+			}
+				
 			else if (_typeStrafe)
 				StrafeToWaypoint();
 		}
@@ -194,6 +202,7 @@ public class AIControl : MonoBehaviour
 		float _timeUntilCrouch = Random.Range(2.0f, 3.0f);										// [rand]
 		yield return new WaitForSeconds(_timeUntilCrouch);										// wait
 		_animator.SetTrigger("CrouchTrigger");													// crouch
+		_imBusy = false;
 
 	}
 
