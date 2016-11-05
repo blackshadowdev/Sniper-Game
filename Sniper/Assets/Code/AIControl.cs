@@ -24,6 +24,7 @@ public class AIControl : MonoBehaviour
 	private bool _bossIsEntering;
 	private bool _bossMovingToWaypoint;
 	private int _bossHealth = 3;
+	private float _bossNewWaypointTime;
 
 	private BulletSpawner _bulletSpawner;
 	private AudioSource _audioSource;
@@ -96,6 +97,17 @@ public class AIControl : MonoBehaviour
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
 			{
 				int _randBossAction = Random.Range(0,2);
+				//Debug.Log("boss rand action = " + _randBossAction);
+				if (!_imBusy)
+				{
+					_imBusy = true;
+					Debug.Log("boss near waypoint; stop and fire");
+					StopAllCoroutines();
+					StartCoroutine(BossFireSequence());
+				}
+					
+
+				/*
 				if (_randBossAction == 0)
 				{
 					StartCoroutine(BossFireSequence());
@@ -103,7 +115,23 @@ public class AIControl : MonoBehaviour
 				{
 					BossFindNewWaypoint();
 				}
-			}	
+				*/
+			}
+
+			if (Time.time - _bossNewWaypointTime > 12)
+			{
+				if (!_imBusy)
+				{
+					//StopAllCoroutines();
+					Debug.Log("boss time out must fire");
+
+					StartCoroutine(BossFireSequence());
+					_imBusy = true;
+				}
+					
+				//BossFindNewWaypoint();
+			}
+				
 		}
 
 		else if (_bossIsEntering)
@@ -112,19 +140,24 @@ public class AIControl : MonoBehaviour
 			{
 				_bossIsEntering = false;
 				_animator.SetTrigger("SlowWalkTrigger");
-				BossFindNewWaypoint();
+				//StopAllCoroutines();
+				//StartCoroutine(BossFireSequence());
+				//_imBusy = true;
 			}
 		}
 	}
 
 	private IEnumerator BossFireSequence ()
 	{
+		Debug.Log("starting boss fire sequence");
+		_imBusy = true;
 		_animator.SetTrigger("StandIdleTrigger");
+		//transform.LookAt(_player);
 		yield return new WaitForSeconds(0.5f);
-		transform.LookAt(_player);
 		Fire();
 		yield return new WaitForSeconds(0.5f);
 		BossFindNewWaypoint();
+
 
 
 		if (_bossHealth == 3)
@@ -138,13 +171,17 @@ public class AIControl : MonoBehaviour
 		{
 			_animator.SetTrigger("RunTrigger");
 		}
+
+		_imBusy = false;
 	}
 
 	private void BossFindNewWaypoint ()
 	{
-		float _tempX = _waypoint1.position.x + Random.Range(-15,15);
-		float _tempZ = _waypoint1.position.z + Random.Range(-15,15);
+		Debug.Log("boss found a new waypoint");
+		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
+		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
+		_bossNewWaypointTime = Time.time;
 	}
 
 	public void TakeAction ()
@@ -245,4 +282,14 @@ public class AIControl : MonoBehaviour
 
 		return relativePosition;
 	}
+
+	/*
+	void OnCollisionEnter (Collision collision)
+	{
+		if (_typeBoss)
+			BossFindNewWaypoint();
+	}
+	*/
+
+
 }
