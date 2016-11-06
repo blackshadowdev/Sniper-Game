@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.24648549, g: 0.28233013, b: 0.3456741, a: 1}
+  m_IndirectSpecularColor: {r: 0.18053626, g: 0.2260185, b: 0.30718803, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -90,35 +90,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &22239482
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &159536034
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +538,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 923010505}
   m_RootOrder: 2
+--- !u!21 &301885367
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &416571017
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +972,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584209450}
-  m_Mesh: {fileID: 923242693}
+  m_Mesh: {fileID: 1151455175}
 --- !u!23 &584209453
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -987,7 +987,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 22239482}
+  - {fileID: 301885367}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1225,7 +1225,83 @@ Transform:
   - {fileID: 283776530}
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!43 &923242693
+--- !u!1 &1030893246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000014261053830, guid: 56de07cf0bf8a5947b4f81e45aa16705,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 687659491}
+  - 114: {fileID: 1030893249}
+  - 114: {fileID: 1030893248}
+  - 114: {fileID: 1030893247}
+  m_Layer: 0
+  m_Name: Controller (left)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1030893247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011790412656, guid: 56de07cf0bf8a5947b4f81e45aa16705,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030893246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneManager: {fileID: 169614131}
+  _leftOrRight: left
+  _laser: {fileID: 1625112576}
+  _spotterTool: {fileID: 0}
+--- !u!114 &1030893248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013887272652, guid: 56de07cf0bf8a5947b4f81e45aa16705,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030893246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9150751bab9474890b941ec22db142d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerIndex: 0
+  triggerPressed: 0
+  steamPressed: 0
+  menuPressed: 0
+  padPressed: 0
+  padTouched: 0
+  gripped: 0
+  _sceneManager: {fileID: 169614131}
+  _leftOrRight: left
+--- !u!114 &1030893249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013093613878, guid: 56de07cf0bf8a5947b4f81e45aa16705,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030893246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: -1
+  origin: {fileID: 0}
+  isValid: 0
+--- !u!212 &1115822401 stripped
+SpriteRenderer:
+  m_PrefabParentObject: {fileID: 212000012271462070, guid: 649f2455afdb46249886f0b90027e26a,
+    type: 2}
+  m_PrefabInternal: {fileID: 464334700}
+--- !u!43 &1151455175
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1353,80 +1429,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!1 &1030893246
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000014261053830, guid: 56de07cf0bf8a5947b4f81e45aa16705,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 687659491}
-  - 114: {fileID: 1030893249}
-  - 114: {fileID: 1030893248}
-  - 114: {fileID: 1030893247}
-  m_Layer: 0
-  m_Name: Controller (left)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1030893247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011790412656, guid: 56de07cf0bf8a5947b4f81e45aa16705,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1030893246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _leftOrRight: left
-  _laser: {fileID: 0}
---- !u!114 &1030893248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013887272652, guid: 56de07cf0bf8a5947b4f81e45aa16705,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1030893246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9150751bab9474890b941ec22db142d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerIndex: 0
-  triggerPressed: 0
-  steamPressed: 0
-  menuPressed: 0
-  padPressed: 0
-  padTouched: 0
-  gripped: 0
-  _sceneManager: {fileID: 169614131}
-  _leftOrRight: left
---- !u!114 &1030893249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013093613878, guid: 56de07cf0bf8a5947b4f81e45aa16705,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1030893246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: -1
-  origin: {fileID: 0}
-  isValid: 0
---- !u!212 &1115822401 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 212000012271462070, guid: 649f2455afdb46249886f0b90027e26a,
-    type: 2}
-  m_PrefabInternal: {fileID: 464334700}
 --- !u!212 &1152733015 stripped
 SpriteRenderer:
   m_PrefabParentObject: {fileID: 212000011122061830, guid: 649f2455afdb46249886f0b90027e26a,
@@ -1992,6 +1994,10 @@ MonoBehaviour:
   _loadLevelButtonClicked: 0
   _normalOptionButtonClicked: 0
   _hardOptionButtonClicked: 0
+  _againButtonClicked: 0
+  _mainMenuButtonClicked: 0
+  _retryButtonClicked: 0
+  _nextButtonClicked: 0
 --- !u!4 &1630659773
 Transform:
   m_ObjectHideFlags: 0
@@ -2094,8 +2100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneManager: {fileID: 169614131}
   _leftOrRight: right
-  _laser: {fileID: 0}
+  _laser: {fileID: 1625112576}
+  _spotterTool: {fileID: 0}
 --- !u!114 &1711000685
 MonoBehaviour:
   m_ObjectHideFlags: 0
