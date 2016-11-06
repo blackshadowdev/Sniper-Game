@@ -16,6 +16,7 @@ public class ViveControlsExample : MonoBehaviour {
     private MenuManager _menuManager;
 	public string _leftOrRight;
     public Laser _laser;
+    public Rifle _rifle;
 	[SerializeField] private SpotterTool _spotterTool;
 
 
@@ -42,7 +43,7 @@ public class ViveControlsExample : MonoBehaviour {
 
 		if (_leftOrRight == "left")
 		{
-			_sceneManager.ScopeSwitch();
+			//_sceneManager.ScopeSwitch();
 		}
 	}
 
@@ -57,7 +58,7 @@ public class ViveControlsExample : MonoBehaviour {
 		{
 			if (_laser) {
 				if (_laser._newGameButtonClicked) {
-					_menuManager.LoadScene ("MissionBriefing");
+					_menuManager.LoadScene ("Mission 1 Briefing");
 				}
 
 				if (_laser._loadLevelButtonClicked) {
@@ -65,14 +66,30 @@ public class ViveControlsExample : MonoBehaviour {
 				}
 
 				if (_laser._normalOptionButtonClicked) {
-					_menuManager.LoadScene (""); //TODO Mert: Add game scene name
+					_menuManager.LoadScene ("Cartoon City 1");
 				}
 
 				if (_laser._hardOptionButtonClicked) {
-					_menuManager.LoadScene (""); //TODO Mert: Add game scene name
+					_menuManager.LoadScene ("Cartoon City 1");
 				}
-			}
-            _sceneManager.Fire();
+
+                if (_laser._againButtonClicked) {
+                    _menuManager.LoadScene("Cartoon City 1");
+                }
+
+                if (_laser._mainMenuButtonClicked) {
+                    _menuManager.LoadScene("StartMenu");
+                }
+
+                if (_laser._retryButtonClicked) {
+                    _menuManager.LoadScene("Cartoon City 1"); 
+                }
+
+                if (_laser._nextButtonClicked) {
+                    _menuManager.LoadScene(" "); //TODO Mert: Add next scene name
+                }
+            }
+            _rifle.Fire();
 		}
 
 		if (_leftOrRight == "left")
@@ -86,7 +103,7 @@ public class ViveControlsExample : MonoBehaviour {
 		Debug.Log("Unclicked trigger!");
 		//_sceneManager._triggerIsDown = false;
 		//_sceneManager.ClearUI();
-		_sceneManager.TriggerUp();
+		_rifle.TriggerUp();
 
 	}
 
@@ -99,8 +116,8 @@ public class ViveControlsExample : MonoBehaviour {
 
 		if (_leftOrRight == "right")
 		{
-			_sceneManager._rightPadY = e.padY;
-			Debug.Log("rPadY = " + _sceneManager._rightPadY);
+			//_sceneManager._rightPadY = e.padY;
+			//Debug.Log("rPadY = " + _sceneManager._rightPadY);
 		}
 	}
 
