@@ -268,7 +268,7 @@ public class SteamVR_TrackedController : MonoBehaviour
 
 			if (_leftOrRight == "right")
 			{
-				_sceneManager._rightPadY = controllerState.rAxis0.y;	
+				//_sceneManager._rightPadY = controllerState.rAxis0.y;	
 			}
 
 		}

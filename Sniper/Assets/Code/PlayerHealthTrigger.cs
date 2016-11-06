@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerHealthTrigger : MonoBehaviour {
 
-	public sceneManager _sceneManager;
+    public Rifle _rifle;
 
 
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class PlayerHealthTrigger : MonoBehaviour {
 	{
 		if (other.tag == "Bullet")
 		{
-			_sceneManager.PlayerIsHit();
+			_rifle.PlayerIsHit();
 		}	
 
 		
