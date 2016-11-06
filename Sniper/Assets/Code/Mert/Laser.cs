@@ -5,7 +5,7 @@ public class Laser : MonoBehaviour {
 
     private GameObject _scopeCamera;
     [SerializeField]
-    private MenuManager _menuManager;
+    //private MenuManager _menuManager;
     private ViveControlsExample _viveController;
 
     public bool _newGameButtonClicked = false;
@@ -20,7 +20,7 @@ public class Laser : MonoBehaviour {
     // Use this for initialization
     void Start() {
         _scopeCamera = GameObject.Find("Scope Camera");
-        _menuManager = FindObjectOfType<MenuManager>();
+        //_menuManager = FindObjectOfType<MenuManager>();
         _viveController = FindObjectOfType<ViveControlsExample>();
     }
 

@@ -13,9 +13,6 @@ public class EnemyManager : MonoBehaviour {
 	[SerializeField] private List<GameObject> _firstWave;
 	[SerializeField] private List<GameObject> _secondWave;
 
-
-
-
 	void Start () {
 	}
 	

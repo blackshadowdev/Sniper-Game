@@ -121,7 +121,8 @@ GameObject:
   - 124: {fileID: 12409152}
   - 136: {fileID: 136000010197734330}
   - 114: {fileID: 114000011473125434}
-  - 114: {fileID: 114000011923310742}
+  - 114: {fileID: 114000013112268230}
+  - 114: {fileID: 114000013225236208}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: MainCamera
@@ -2008,16 +2009,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124034}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 0}
   _leftOrRight: left
-  _laser: {fileID: 0}
   _rifle: {fileID: 114000010686145854}
   _spotterTool: {fileID: 0}
+  _UIManager: {fileID: 0}
 --- !u!114 &114000010619091504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2042,14 +2042,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scopeOn: 0
-  _camera: {fileID: 2082592}
-  _scopeCamera: {fileID: 20000011139358392}
   _rifleCanFire: 0
   _rightPadY: 0
+  _playerHealth: 0
   _rifleAudioSource: {fileID: 82000012042241430}
   _rifleShot: {fileID: 8300000, guid: 67745518e7f0540e8a2b92e4c7e26080, type: 3}
   _rifleChamber: {fileID: 8300000, guid: 9de56e12ccc4d41f2852efb9a63f0f76, type: 3}
   _magazineReload: {fileID: 8300000, guid: a0eddb1fc73964a3f9c079f9b96c6306, type: 3}
+  _enemyManagerScript: {fileID: 0}
+  _raycaster: {fileID: 114000013112268230}
+  _camera: {fileID: 2082592}
+  _scopeCamera: {fileID: 20000011139358392}
   _bulletIcon1: {fileID: 212000014115762284}
   _bulletIcon2: {fileID: 212000013933852652}
   _bulletIcon3: {fileID: 212000012611905970}
@@ -2057,22 +2060,20 @@ MonoBehaviour:
   _heartIcon1: {fileID: 212000010095102578}
   _heartIcon2: {fileID: 212000013937396630}
   _heartIcon3: {fileID: 212000011387796726}
-  _bloodPfxPrefab: {fileID: 4000010170401598, guid: 5281b895dec1d433cbe5ef1f4e73ebf7,
-    type: 2}
-  _scoreText: {fileID: 0}
   _bloodSplatter: {fileID: 23000011203991100}
+  _fired: 0
 --- !u!114 &114000010807767204
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155680}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5ca352edfd3b47b9ba53d6a442fd982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rifle: {fileID: 0}
+  _rifle: {fileID: 114000010686145854}
 --- !u!114 &114000011473125434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2103,7 +2104,7 @@ MonoBehaviour:
   padPressed: 0
   padTouched: 0
   gripped: 0
-  _sceneManager: {fileID: 0}
+  _UIManager: {fileID: 0}
   _leftOrRight: left
 --- !u!114 &114000011695846914
 MonoBehaviour:
@@ -2123,9 +2124,26 @@ MonoBehaviour:
   padPressed: 1
   padTouched: 0
   gripped: 0
-  _sceneManager: {fileID: 0}
+  _UIManager: {fileID: 0}
   _leftOrRight: right
---- !u!114 &114000011923310742
+--- !u!114 &114000013112268230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50619bec4fb8f564cb7be40d5261b2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bloodPfxPrefab: {fileID: 4000010170401598, guid: 5281b895dec1d433cbe5ef1f4e73ebf7,
+    type: 2}
+  _scopeCamera: {fileID: 20000011139358392}
+  _enemyManagerScript: {fileID: 0}
+  _UIManager: {fileID: 0}
+  _rifle: {fileID: 0}
+--- !u!114 &114000013225236208
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2145,16 +2163,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159396}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 0}
   _leftOrRight: right
-  _laser: {fileID: 0}
   _rifle: {fileID: 114000010686145854}
   _spotterTool: {fileID: 0}
+  _UIManager: {fileID: 0}
 --- !u!124 &124000012919611140
 Behaviour:
   m_ObjectHideFlags: 1

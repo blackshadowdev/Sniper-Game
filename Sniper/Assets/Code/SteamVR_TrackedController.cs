@@ -34,7 +34,7 @@ public class SteamVR_TrackedController : MonoBehaviour
     public event ClickedEventHandler Ungripped;
 
 	//added by Andrew
-	public sceneManager _sceneManager;
+	public UIManager _UIManager;
 	public string _leftOrRight;
 
     // Use this for initialization
@@ -243,7 +243,7 @@ public class SteamVR_TrackedController : MonoBehaviour
                 OnPadTouched(e);
 
 				// added by Andrew
-				_sceneManager._padIsTouched = true;
+				_UIManager._padIsTouched = true;
             }
             else if (pad == 0L && padTouched)
             {
@@ -256,7 +256,7 @@ public class SteamVR_TrackedController : MonoBehaviour
                 OnPadUntouched(e);
 
 				// added by Andrew
-				_sceneManager._padIsTouched = false;
+				_UIManager._padIsTouched = false;
 				//_sceneManager.ClearButtons();
             }
         }

@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System;
 
 public class Rifle : MonoBehaviour {
-    public bool _scopeOn;
+    [SerializeField] private bool _scopeOn;
+    [SerializeField] private bool _rifleCanFire;
+    [SerializeField] private float _rightPadY;
+    [SerializeField] private int _playerHealth;
+
+    [SerializeField] private AudioSource _rifleAudioSource;
+    [SerializeField] private AudioClip _rifleShot;
+    [SerializeField] private AudioClip _rifleChamber;
+    [SerializeField] private AudioClip _magazineReload;
+    
+    public EnemyManager _enemyManagerScript;
+    public Raycaster _raycaster;
+
     public Camera _camera;
     public Camera _scopeCamera;
-    public bool _rifleCanFire;
-    public float _rightPadY;
-    public AudioSource _rifleAudioSource;
-    public AudioClip _rifleShot;
-    public AudioClip _rifleChamber;
-    public AudioClip _magazineReload;
     public SpriteRenderer _bulletIcon1;
     public SpriteRenderer _bulletIcon2;
     public SpriteRenderer _bulletIcon3;
@@ -19,20 +25,12 @@ public class Rifle : MonoBehaviour {
     public SpriteRenderer _heartIcon1;
     public SpriteRenderer _heartIcon2;
     public SpriteRenderer _heartIcon3;
-    public Transform _bloodPfxPrefab;
-    private EnemyManager _enemyManagerScript;
-    private sceneManager _sceneManager;
-    //private float _startTime;
-    public Text _scoreText;
     public Renderer _bloodSplatter;
+    public bool _fired;
 
     // Use this for initialization
     void Start() {
-        _enemyManagerScript = FindObjectOfType<EnemyManager>();
-        _sceneManager = FindObjectOfType<sceneManager>();
-        _sceneManager._startTime = Time.time;
         _rifleCanFire = true;
-        _scoreText.text = "0";
     }
 
     // Update is called once per frame
@@ -40,41 +38,16 @@ public class Rifle : MonoBehaviour {
         if (_bloodSplatter.material.color.a > 0) {
             float _tempAlpha = _bloodSplatter.material.color.a - 0.01f;
             _bloodSplatter.material.color = new Color(1, 1, 1, _tempAlpha);
-
         }
     }
 
     public void Fire() {
         if (_rifleCanFire) {
             _rifleAudioSource.PlayOneShot(_rifleShot);
-            Vector3 _fwd = _scopeCamera.transform.TransformDirection(Vector3.forward);
-            RaycastHit _hit;
-            Debug.DrawRay(_scopeCamera.transform.position, _fwd * 100, Color.green, 1);
-            if (Physics.Raycast(_scopeCamera.transform.position, _fwd, out _hit)) {
-                if (_hit.transform.tag == "Enemy") {
-                    _enemyManagerScript.KillEnemy(_hit.transform.gameObject);
-                    Instantiate(_bloodPfxPrefab, _hit.point, Quaternion.identity);
-                    _sceneManager._bonusTime += 15;
-                    _sceneManager._timerPfx.Emit(50);
-                    _sceneManager._playerScore += 250;
-                    _scoreText.text = _sceneManager._playerScore.ToString();
-                    _sceneManager._scorePFX.Emit(50);
-                }
-
-                if (_hit.transform.tag == "Civilian") {
-                    CivilianAI _civilianController = _hit.transform.GetComponent<CivilianAI>();
-                    _civilianController.Die();
-                    _sceneManager._playerScore -= 500;
-                    _scoreText.text = _sceneManager._playerScore.ToString();
-                    _sceneManager._scorePFX.Emit(50);
-                }
-            }
-            else {
-                Debug.Log("Miss!");
-            }
-
+           // _fired = true;
+           
             //  SetBulletIcons();
-
+            _raycaster.Raycast();
 
             _rifleCanFire = false;
         }
@@ -139,7 +112,7 @@ public class Rifle : MonoBehaviour {
     }
 
     public void PlayerIsHit() {
-        // _playerHealth--;
+        _playerHealth--;
         if (_heartIcon3.enabled) {
             _heartIcon3.enabled = false;
             _bloodSplatter.material.color = new Color(1, 1, 1, 0.5f);

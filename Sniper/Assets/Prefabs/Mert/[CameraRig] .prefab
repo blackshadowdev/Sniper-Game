@@ -258,6 +258,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010806041510}
+  - 114: {fileID: 114000014215336916}
   m_Layer: 0
   m_Name: Sniper Rifle
   m_TagString: Untagged
@@ -1949,10 +1950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 114000010511016218, guid: 9df72eeb2760dc94e8f10acab8b00027,
-    type: 2}
+  _sceneManager: {fileID: 0}
   _leftOrRight: left
   _laser: {fileID: 114000013244018050}
+  _rifle: {fileID: 0}
   _spotterTool: {fileID: 0}
 --- !u!114 &114000012170522128
 MonoBehaviour:
@@ -2036,7 +2037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8a7b82d87e894478c22dff6620e556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuManager: {fileID: 0}
+  _viveController: {fileID: 0}
   _newGameButtonClicked: 0
   _loadLevelButtonClicked: 0
   _normalOptionButtonClicked: 0
@@ -2056,10 +2057,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 114000010511016218, guid: 9df72eeb2760dc94e8f10acab8b00027,
-    type: 2}
+  _sceneManager: {fileID: 0}
   _leftOrRight: right
   _laser: {fileID: 114000013244018050}
+  _rifle: {fileID: 0}
   _spotterTool: {fileID: 0}
 --- !u!114 &114000013547050058
 MonoBehaviour:
@@ -2113,6 +2114,36 @@ MonoBehaviour:
   gripped: 0
   _sceneManager: {fileID: 0}
   _leftOrRight: left
+--- !u!114 &114000014215336916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011582463596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbff3563821f7d4081946b3b6e9f435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scopeOn: 0
+  _camera: {fileID: 0}
+  _scopeCamera: {fileID: 0}
+  _rifleCanFire: 0
+  _rightPadY: 0
+  _rifleAudioSource: {fileID: 0}
+  _rifleShot: {fileID: 0}
+  _rifleChamber: {fileID: 0}
+  _magazineReload: {fileID: 0}
+  _bulletIcon1: {fileID: 0}
+  _bulletIcon2: {fileID: 0}
+  _bulletIcon3: {fileID: 0}
+  _bulletIcon4: {fileID: 0}
+  _heartIcon1: {fileID: 0}
+  _heartIcon2: {fileID: 0}
+  _heartIcon3: {fileID: 0}
+  _bloodPfxPrefab: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _bloodSplatter: {fileID: 0}
 --- !u!124 &124000012897732660
 Behaviour:
   m_ObjectHideFlags: 1

@@ -94,9 +94,12 @@
     <Compile Include="Assets\Code\BulletSpawner.cs" />
     <Compile Include="Assets\Code\CivilianAI.cs" />
     <Compile Include="Assets\Code\EnemyManager.cs" />
+    <Compile Include="Assets\Code\Mert\InteractiveItem.cs" />
     <Compile Include="Assets\Code\Mert\Laser.cs" />
-    <Compile Include="Assets\Code\Mert\MenuManager.cs" />
+    <Compile Include="Assets\Code\Mert\MenuButton.cs" />
+    <Compile Include="Assets\Code\Mert\Raycaster.cs" />
     <Compile Include="Assets\Code\Mert\Rifle.cs" />
+    <Compile Include="Assets\Code\Mert\UIManager.cs" />
     <Compile Include="Assets\Code\Mert\ViveControllerLaptop.cs" />
     <Compile Include="Assets\Code\PlayerHealthTrigger.cs" />
     <Compile Include="Assets\Code\SpotterTool.cs" />
@@ -104,7 +107,6 @@
     <Compile Include="Assets\Code\ViveControlsExample.cs" />
     <Compile Include="Assets\Code\deleteSelf.cs" />
     <Compile Include="Assets\Code\pivotRifle.cs" />
-    <Compile Include="Assets\Code\sceneManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetPacks\MCP\Demo\shaders\Chromatic\AdvancedCA.shader" />
