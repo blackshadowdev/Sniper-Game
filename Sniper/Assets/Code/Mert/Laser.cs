@@ -12,6 +12,10 @@ public class Laser : MonoBehaviour {
     public bool _loadLevelButtonClicked = false;
     public bool _normalOptionButtonClicked = false;
     public bool _hardOptionButtonClicked = false;
+    public bool _againButtonClicked = false;
+    public bool _mainMenuButtonClicked = false;
+    public bool _retryButtonClicked = false;
+    public bool _nextButtonClicked = false;
 
     // Use this for initialization
     void Start() {
@@ -35,6 +39,22 @@ public class Laser : MonoBehaviour {
 
         if (other.name == "Hard Button") {
             _hardOptionButtonClicked = true;
+        }
+
+        if (other.name == "Again Button") {
+            _againButtonClicked = true;
+        }
+
+        if(other.name == "Main Menu Button") {
+            _mainMenuButtonClicked = true;
+        }
+
+        if (other.name == "Retry Button") {
+            _retryButtonClicked = true;
+        }
+
+        if (other.name == "Next Button") {
+            _nextButtonClicked = true;
         }
     }
 }
