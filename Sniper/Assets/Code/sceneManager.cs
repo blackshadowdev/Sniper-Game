@@ -7,46 +7,46 @@ using UnityEngine.UI;
 public class sceneManager : MonoBehaviour {
 
 
-	public bool _laptopTesting;
-	public bool _scopeOn;
-	public Camera _camera;
-	public Camera _scopeCamera;
+	//public bool _laptopTesting;
+	//public bool _scopeOn;
+	/*public Camera _camera;
+	public Camera _scopeCamera;*/
 	public Transform _bloodPfxPrefab;
-	public Transform _leftController;
-	public Transform _rightController;
-	public Transform _head;
-	public AudioSource _rifleAudioSource;
+	//public Transform _leftController;
+	//public Transform _rightController;
+	//public Transform _head;
+	/*public AudioSource _rifleAudioSource;
 	public AudioClip _rifleShot;
 	public AudioClip _rifleChamber;
-	public AudioClip _magazineReload;
+	public AudioClip _magazineReload;*/
 	public float _rightPadY;
 	private float _lastRightPadY;
 	public bool _padIsTouched;
-	public bool _rifleCanFire;
+	//public bool _rifleCanFire;
 	public EnemyManager _enemyManagerScript;
 
-	public SpriteRenderer _bulletIcon1;
+	/*public SpriteRenderer _bulletIcon1;
 	public SpriteRenderer _bulletIcon2;
 	public SpriteRenderer _bulletIcon3;
-	public SpriteRenderer _bulletIcon4;
+	public SpriteRenderer _bulletIcon4;*/
 
 	public Transform _scopePivot;
 	public Light _lightSource;
 	public Renderer _fadeToBlack;
 
 	public int _playerHealth;
-	public SpriteRenderer _heartIcon1;
+	/*public SpriteRenderer _heartIcon1;
 	public SpriteRenderer _heartIcon2;
-	public SpriteRenderer _heartIcon3;
-	public Renderer _bloodSplatter;
+	public SpriteRenderer _heartIcon3;*/
+	//public Renderer _bloodSplatter;
 
 	public Text _timerText;
-	private float _startTime;
-	private float _elapsedTime;
-	private int _bonusTime;
+	public float _startTime;
+	public float _elapsedTime;
+	public int _bonusTime;
 	public ParticleSystem _timerPfx;
 	public Text _scoreText;
-	private int _playerScore;
+	public int _playerScore;
 	public ParticleSystem _scorePFX;
 
 
@@ -55,23 +55,23 @@ public class sceneManager : MonoBehaviour {
 	void Start () 
 	{
 		_startTime = Time.time;
-		_rifleCanFire = true;
+		//_rifleCanFire = true;
 		_scoreText.text = "0";
 
-		if (_laptopTesting)
+		/*if (_laptopTesting)
 		{
 			_leftController.gameObject.SetActive(true);
 			_rightController.gameObject.SetActive(true);
 			_head.position = new Vector3(_head.position.x+1,_head.position.y+1.6f,_head.position.z);
 			_leftController.position = new Vector3(_leftController.position.x+1,_leftController.position.y+1.5f,_leftController.position.z-1.5f);
 			_rightController.position = new Vector3(_rightController.position.x+1,_rightController.position.y+1.5f,_rightController.position.z-0.1f);
-		}
+		}*/
 	}
 
 
 	void Update () 
 	{
-		if (Input.GetKeyDown("space"))
+		/*if (Input.GetKeyDown("space"))
 		{
 			ScopeSwitch();
 		}
@@ -90,17 +90,17 @@ public class sceneManager : MonoBehaviour {
 		if (Input.GetKey("q"))
 		{
 			_head.transform.Translate(Vector3.right * -0.1f);
-		}
+		}*/
 
 		_elapsedTime = 100 - Time.time + _startTime + _bonusTime;
 		_timerText.text = _elapsedTime.ToString();
 
-		if (_bloodSplatter.material.color.a > 0)
-		{
-			float _tempAlpha = _bloodSplatter.material.color.a - 0.01f;
-			_bloodSplatter.material.color = new Color(1,1,1,_tempAlpha);
+		//if (_bloodSplatter.material.color.a > 0)
+		//{
+		//	float _tempAlpha = _bloodSplatter.material.color.a - 0.01f;
+		//	_bloodSplatter.material.color = new Color(1,1,1,_tempAlpha);
 
-		}
+		//}
 
 		/*
 		 * 
@@ -157,7 +157,7 @@ public class sceneManager : MonoBehaviour {
 	} // end of Update()
 		
 
-	private void AdjustZoom ()
+	/*private void AdjustZoom ()
 	{
 		float _tempRightPadY = _rightPadY;
 		if (_tempRightPadY > 0.5f)
@@ -171,10 +171,10 @@ public class sceneManager : MonoBehaviour {
 		float _newFov = _tempRightPadY*50;
 		_scopeCamera.fieldOfView = _newFov;
 
-		_scopePivot.LookAt(_head);
-	}
+		//_scopePivot.LookAt(_head);
+	}*/
 
-	public void ScopeSwitch ()
+	/*public void ScopeSwitch ()
 	{
 		// if Scope View, switch to Normal View
 		if (_scopeOn)
@@ -191,9 +191,9 @@ public class sceneManager : MonoBehaviour {
 			_camera.clearFlags = CameraClearFlags.SolidColor;
 			_scopeOn = true;
 		}
-	} // end of ScopeSwitch()
+	} // end of ScopeSwitch() */
 
-	public void Fire ()
+	/*public void Fire ()
 	{
 		if (_rifleCanFire)
 		{
@@ -231,9 +231,9 @@ public class sceneManager : MonoBehaviour {
 
 			_rifleCanFire = false;
 		}
-	} // end of Fire()
+	} // end of Fire()*/
 
-	private void SetBulletIcons ()
+	/*private void SetBulletIcons ()
 	{
 		if (_bulletIcon4.enabled)
 		{
@@ -279,28 +279,28 @@ public class sceneManager : MonoBehaviour {
 		_bulletIcon3.enabled = true;
 		_bulletIcon4.enabled = true;
 		_rifleCanFire = true;
-	}
+	}*/
 
-	public void PlayerIsHit ()
-	{
-		_playerHealth--;
-		if (_heartIcon3.enabled)
-		{
-			_heartIcon3.enabled = false;
-			_bloodSplatter.material.color = new Color(1,1,1,0.5f);
-		}
-		else if (_heartIcon2.enabled)
-		{
-			_heartIcon2.enabled = false;
-			_bloodSplatter.material.color = new Color(1,1,1,1);
-		} 
-		else if (_heartIcon1.enabled)
-		{
-			_heartIcon1.enabled = false;
-			if (Application.loadedLevelName == "rifle and npcs")
-				SceneManager.LoadScene("rifle and npcs");
-			if (Application.loadedLevelName == "city 1")
-				SceneManager.LoadScene("city 1");
-		}
-	}
+	//public void PlayerIsHit ()
+	//{
+	//	_playerHealth--;
+	//	if (_heartIcon3.enabled)
+	//	{
+	//		_heartIcon3.enabled = false;
+	//		_bloodSplatter.material.color = new Color(1,1,1,0.5f);
+	//	}
+	//	else if (_heartIcon2.enabled)
+	//	{
+	//		_heartIcon2.enabled = false;
+	//		_bloodSplatter.material.color = new Color(1,1,1,1);
+	//	} 
+	//	else if (_heartIcon1.enabled)
+	//	{
+	//		_heartIcon1.enabled = false;
+	//		if (Application.loadedLevelName == "rifle and npcs")
+	//			SceneManager.LoadScene("rifle and npcs");
+	//		if (Application.loadedLevelName == "city 1")
+	//			SceneManager.LoadScene("city 1");
+	//	}
+	//}
 }
