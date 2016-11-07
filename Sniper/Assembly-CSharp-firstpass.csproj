@@ -89,7 +89,7 @@
      <Compile Include="Assets\Plugins\SteamVR\Extras\SteamVR_Teleporter.cs" />
      <Compile Include="Assets\Plugins\SteamVR\Extras\SteamVR_TestThrow.cs" />
      <Compile Include="Assets\Plugins\SteamVR\Extras\SteamVR_TestTrackedCamera.cs" />
-     <Compile Include="Assets\Plugins\SteamVR\Extras\SteamVR_TrackedControllerOriginal.cs" />
+     <Compile Include="Assets\Plugins\SteamVR\Extras\SteamVR_TrackedController.cs" />
      <Compile Include="Assets\Plugins\SteamVR\Scripts\SteamVR.cs" />
      <Compile Include="Assets\Plugins\SteamVR\Scripts\SteamVR_Camera.cs" />
      <Compile Include="Assets\Plugins\SteamVR\Scripts\SteamVR_CameraFlip.cs" />
