@@ -68,7 +68,6 @@
      <Compile Include="Assets\Code\CivilianAI.cs" />
      <Compile Include="Assets\Code\EnemyManager.cs" />
      <Compile Include="Assets\Code\Mert\InteractiveItem.cs" />
-     <Compile Include="Assets\Code\Mert\Laser.cs" />
      <Compile Include="Assets\Code\Mert\MenuButton.cs" />
      <Compile Include="Assets\Code\Mert\Raycaster.cs" />
      <Compile Include="Assets\Code\Mert\Rifle.cs" />

@@ -1,5 +1,7 @@
 ﻿using System.Collections;													
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class AIControl : MonoBehaviour
 {
@@ -266,12 +268,20 @@ public class AIControl : MonoBehaviour
 			} else if (_bossHealth == 0)
 			{
 				_animator.SetTrigger("DeathTrigger");
+				Invoke ("TempEndLevel", 2);
+				Debug.Log ("boss ıs dead");
 			}
 			BossFindNewWaypoint();
 		}
 
 	}
 
+
+	private void TempEndLevel()
+	{
+		Debug.Log ("temp end level called");
+		SceneManager.LoadScene("YouWin");
+	}
 
 	public Vector3 getRelativePosition(Transform origin, Vector3 position) {				
 		Vector3 distance = position - origin.position;
