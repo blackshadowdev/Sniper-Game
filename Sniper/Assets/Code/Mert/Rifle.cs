@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class Rifle : MonoBehaviour {
     [SerializeField] private bool _scopeOn;
@@ -125,8 +127,8 @@ public class Rifle : MonoBehaviour {
             _heartIcon1.enabled = false;
             //if (Application.loadedLevelName == "rifle and npcs")
             //SceneManager.LoadScene("rifle and npcs");
-            // if (Application.loadedLevelName == "city 1")
-            //SceneManager.LoadScene("city 1");
+            if (Application.loadedLevelName == "Cartoon City 1")
+            SceneManager.LoadScene("YouDied");
         }
     }
 
