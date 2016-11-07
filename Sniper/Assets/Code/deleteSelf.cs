@@ -3,7 +3,7 @@ using System.Collections;
 
 public class deleteSelf : MonoBehaviour {
 
-	public float _timeToDelete;
+	[SerializeField] private float _timeToDelete;
 
 	// Use this for initialization
 	void Start () {

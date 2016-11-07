@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+using UnityEngine;
 using Valve.VR;
 
 public struct ClickedEventArgs
@@ -33,10 +34,6 @@ public class SteamVR_TrackedController : MonoBehaviour
     public event ClickedEventHandler Gripped;
     public event ClickedEventHandler Ungripped;
 
-	//added by Andrew
-	public UIManager _UIManager;
-	public string _leftOrRight;
-
     // Use this for initialization
     void Start()
     {
@@ -57,8 +54,6 @@ public class SteamVR_TrackedController : MonoBehaviour
 		{
 			controllerIndex = (uint) this.GetComponent<SteamVR_TrackedObject>().index;
         }
-
-		//_sceneManager = GameObject.Find("SceneManager").GetComponent<sceneManager>();
     }
 
 	public void SetDeviceIndex(int index)
@@ -111,7 +106,7 @@ public class SteamVR_TrackedController : MonoBehaviour
     public virtual void OnPadTouched(ClickedEventArgs e)
     {
         if (PadTouched != null)
-            PadTouched(this, e); 
+            PadTouched(this, e);
     }
 
     public virtual void OnPadUntouched(ClickedEventArgs e)
@@ -187,16 +182,13 @@ public class SteamVR_TrackedController : MonoBehaviour
             ulong pad = controllerState.ulButtonPressed & (1UL << ((int)EVRButtonId.k_EButton_SteamVR_Touchpad));
             if (pad > 0L && !padPressed)
             {
-				padPressed = true;
+                padPressed = true;
                 ClickedEventArgs e;
                 e.controllerIndex = controllerIndex;
                 e.flags = (uint)controllerState.ulButtonPressed;
                 e.padX = controllerState.rAxis0.x;
                 e.padY = controllerState.rAxis0.y;
                 OnPadClicked(e);
-
-				// added by Andrew
-				//_sceneManager.PadClicked();
             }
             else if (pad == 0L && padPressed)
             {
@@ -242,8 +234,6 @@ public class SteamVR_TrackedController : MonoBehaviour
                 e.padY = controllerState.rAxis0.y;
                 OnPadTouched(e);
 
-				// added by Andrew
-				_UIManager._padIsTouched = true;
             }
             else if (pad == 0L && padTouched)
             {
@@ -254,23 +244,7 @@ public class SteamVR_TrackedController : MonoBehaviour
                 e.padX = controllerState.rAxis0.x;
                 e.padY = controllerState.rAxis0.y;
                 OnPadUntouched(e);
-
-				// added by Andrew
-				_UIManager._padIsTouched = false;
-				//_sceneManager.ClearButtons();
             }
         }
-
-		// added by Andrew
-		if (padTouched)
-		{
-			//_sceneManager._padX = controllerState.rAxis0.x;
-
-			if (_leftOrRight == "right")
-			{
-				//_sceneManager._rightPadY = controllerState.rAxis0.y;	
-			}
-
-		}
     }
 }
