@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18053626, g: 0.2260185, b: 0.30718803, a: 1}
+  m_IndirectSpecularColor: {r: 0.24648565, g: 0.2823304, b: 0.34567446, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -389,6 +389,35 @@ MonoBehaviour:
   _sceneToLoad: 'Mission 1 Briefing '
   _interactiveItem: {fileID: 277562960}
   _rifle: {fileID: 1692431449}
+--- !u!21 &279910098
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &283776527
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,35 +633,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!21 &453824445
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &541437219
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584209450}
-  m_Mesh: {fileID: 1118162312}
+  m_Mesh: {fileID: 1123871125}
 --- !u!23 &584209453
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -764,7 +764,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 453824445}
+  - {fileID: 279910098}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030893246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9150751bab9474890b941ec22db142d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7346a42905a29b347b1f492e8ad7b49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controllerIndex: 0
@@ -1054,8 +1054,6 @@ MonoBehaviour:
   padPressed: 0
   padTouched: 0
   gripped: 0
-  _UIManager: {fileID: 0}
-  _leftOrRight: left
 --- !u!114 &1030893249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,7 +1069,7 @@ MonoBehaviour:
   index: -1
   origin: {fileID: 0}
   isValid: 0
---- !u!43 &1118162312
+--- !u!43 &1123871125
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1710,7 +1708,12 @@ Prefab:
       propertyPath: _raycaster
       value: 
       objectReference: {fileID: 1404268974}
-    m_RemovedComponents: []
+    - target: {fileID: 1000013199567538, guid: 810d581e3f6587346a6c5c81fb4333c6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000011949651936, guid: 810d581e3f6587346a6c5c81fb4333c6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 810d581e3f6587346a6c5c81fb4333c6, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1692431447 stripped
@@ -1774,18 +1777,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1711000683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9150751bab9474890b941ec22db142d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7346a42905a29b347b1f492e8ad7b49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controllerIndex: 0
   triggerPressed: 0
   steamPressed: 0
   menuPressed: 0
-  padPressed: 1
+  padPressed: 0
   padTouched: 0
   gripped: 0
-  _UIManager: {fileID: 0}
-  _leftOrRight: right
 --- !u!114 &1711000686
 MonoBehaviour:
   m_ObjectHideFlags: 0
