@@ -8,7 +8,6 @@ public class Rifle : MonoBehaviour {
     [SerializeField] private bool _scopeOn;
     [SerializeField] private bool _rifleCanFire;
     [SerializeField] private float _rightPadY;
-    [SerializeField] private int _playerHealth;
 
     [SerializeField] private AudioSource _rifleAudioSource;
     [SerializeField] private AudioClip _rifleShot;
@@ -24,10 +23,7 @@ public class Rifle : MonoBehaviour {
     public SpriteRenderer _bulletIcon2;
     public SpriteRenderer _bulletIcon3;
     public SpriteRenderer _bulletIcon4;
-    public SpriteRenderer _heartIcon1;
-    public SpriteRenderer _heartIcon2;
-    public SpriteRenderer _heartIcon3;
-    public Renderer _bloodSplatter;
+   
     public bool _fired;
 
 	private VibrateController _vibrateController;
@@ -40,10 +36,7 @@ public class Rifle : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (_bloodSplatter.material.color.a > 0) {
-            float _tempAlpha = _bloodSplatter.material.color.a - 0.01f;
-            _bloodSplatter.material.color = new Color(1, 1, 1, _tempAlpha);
-        }
+       
     }
 
     public void Fire() {
@@ -118,25 +111,7 @@ public class Rifle : MonoBehaviour {
         }
     }
 
-    public void PlayerIsHit() {
-        _playerHealth--;
-		_vibrateController.VibrateForDamage ();
-        if (_heartIcon3.enabled) {
-            _heartIcon3.enabled = false;
-            _bloodSplatter.material.color = new Color(1, 1, 1, 0.5f);
-        }
-        else if (_heartIcon2.enabled) {
-            _heartIcon2.enabled = false;
-            _bloodSplatter.material.color = new Color(1, 1, 1, 1);
-        }
-        else if (_heartIcon1.enabled) {
-            _heartIcon1.enabled = false;
-            //if (Application.loadedLevelName == "rifle and npcs")
-            //SceneManager.LoadScene("rifle and npcs");
-            if (Application.loadedLevelName == "Cartoon City 1")
-            SceneManager.LoadScene("YouDied");
-        }
-    }
+   
 
     public void TriggerUp() {
         if (_bulletIcon1.enabled == false) {
