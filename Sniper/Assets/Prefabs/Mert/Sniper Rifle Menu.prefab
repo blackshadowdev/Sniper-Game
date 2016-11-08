@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013365783670
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +272,6 @@ GameObject:
   - 136: {fileID: 136000012010642334}
   - 23: {fileID: 23000012248928676}
   - 54: {fileID: 54000010383981496}
-  - 114: {fileID: 114000011949651936}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -323,6 +322,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013282653458}
   - 114: {fileID: 114000013845092804}
+  - 114: {fileID: 114000011974427354}
   m_Layer: 0
   m_Name: Sniper Rifle Menu
   m_TagString: Untagged
@@ -1112,26 +1112,20 @@ Light:
   m_BounceIntensity: 4.5
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114000011949651936
+--- !u!114 &114000011974427354
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013483918482}
+  m_GameObject: {fileID: 1000013830532588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8a7b82d87e894478c22dff6620e556, type: 3}
+  m_Script: {fileID: 11500000, guid: dc7772dfc8167e94db2620dcd6fd0543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viveController: {fileID: 0}
-  _newGameButtonClicked: 0
-  _loadLevelButtonClicked: 0
-  _normalOptionButtonClicked: 0
-  _hardOptionButtonClicked: 0
-  _againButtonClicked: 0
-  _mainMenuButtonClicked: 0
-  _retryButtonClicked: 0
-  _nextButtonClicked: 0
+  _leftController: 0
+  _leftControllerIndex: 0
+  _rightControllerIndex: 0
 --- !u!114 &114000013845092804
 MonoBehaviour:
   m_ObjectHideFlags: 1

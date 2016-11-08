@@ -73,6 +73,7 @@
      <Compile Include="Assets\Code\Mert\Rifle.cs" />
      <Compile Include="Assets\Code\Mert\UIManager.cs" />
      <Compile Include="Assets\Code\Mert\ViveControllerLaptop.cs" />
+     <Compile Include="Assets\Code\PlayerHealth.cs" />
      <Compile Include="Assets\Code\PlayerHealthTrigger.cs" />
      <Compile Include="Assets\Code\SpotterTool.cs" />
      <Compile Include="Assets\Code\VibrateController.cs" />
