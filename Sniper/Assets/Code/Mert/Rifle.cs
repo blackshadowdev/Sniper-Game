@@ -30,9 +30,12 @@ public class Rifle : MonoBehaviour {
     public Renderer _bloodSplatter;
     public bool _fired;
 
+	private VibrateController _vibrateController;
+
     // Use this for initialization
     void Start() {
         _rifleCanFire = true;
+		_vibrateController = transform.GetComponent<VibrateController> ();
     }
 
     // Update is called once per frame
@@ -45,6 +48,7 @@ public class Rifle : MonoBehaviour {
 
     public void Fire() {
         if (_rifleCanFire) {
+			_vibrateController.VibrateForFiring ();
             _rifleAudioSource.PlayOneShot(_rifleShot);
            // _fired = true;
            
@@ -52,6 +56,7 @@ public class Rifle : MonoBehaviour {
             _raycaster.Raycast();
 
             _rifleCanFire = false;
+
         }
     } // end of Fire() 
 
@@ -115,6 +120,7 @@ public class Rifle : MonoBehaviour {
 
     public void PlayerIsHit() {
         _playerHealth--;
+		_vibrateController.VibrateForDamage ();
         if (_heartIcon3.enabled) {
             _heartIcon3.enabled = false;
             _bloodSplatter.material.color = new Color(1, 1, 1, 0.5f);
