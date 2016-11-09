@@ -27,6 +27,7 @@ public class Rifle : MonoBehaviour {
     public bool _fired;
 
 	private VibrateController _vibrateController;
+	[SerializeField] private ParticleSystem _muzzleFlashPfx;
 
     // Use this for initialization
     void Start() {
@@ -43,6 +44,7 @@ public class Rifle : MonoBehaviour {
         if (_rifleCanFire) {
 			_vibrateController.VibrateForFiring ();
             _rifleAudioSource.PlayOneShot(_rifleShot);
+			_muzzleFlashPfx.Emit (1);
            // _fired = true;
            
             //  SetBulletIcons();
