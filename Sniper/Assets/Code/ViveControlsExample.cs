@@ -16,6 +16,7 @@ public class ViveControlsExample : MonoBehaviour {
     [SerializeField] private Rifle _rifle;
 	[SerializeField] private SpotterTool _spotterTool;
     [SerializeField] private UIManager _UIManager;
+	[SerializeField] private Scope _scope;
 
     void Start() {
         if (_spotterTool != null && _UIManager != null && _rifle != null) {
@@ -47,6 +48,8 @@ public class ViveControlsExample : MonoBehaviour {
 		if (_leftOrRight == "left")
 		{
 			//_sceneManager.ScopeSwitch();
+			_scope.ScopeSwitch();
+
 		}
 	}
 

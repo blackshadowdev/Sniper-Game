@@ -7,6 +7,7 @@ public class ViveControllerLaptop : MonoBehaviour {
     public Transform _head;
 
     [SerializeField] private Rifle _rifle;
+	[SerializeField] private Scope _scope;
 
     void Start () {
         _leftController.gameObject.SetActive(true);
@@ -19,7 +20,7 @@ public class ViveControllerLaptop : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown("space")) {
-            _rifle.ScopeSwitch();
+			_scope.ScopeSwitch();
         }
         if (Input.GetKeyDown("f")) {
 			_rifle.Fire();  
