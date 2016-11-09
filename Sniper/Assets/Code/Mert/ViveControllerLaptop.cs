@@ -22,9 +22,11 @@ public class ViveControllerLaptop : MonoBehaviour {
             _rifle.ScopeSwitch();
         }
         if (Input.GetKeyDown("f")) {
-            _rifle.Fire();
-            _rifle.Invoke("TriggerUp", 0.5f);
+			_rifle.Fire();  
         }
+		if (Input.GetKeyUp("f")) {
+			_rifle.Invoke("TriggerUp", 0.5f);
+		}
         if (Input.GetKey("e")) {
             _head.transform.Translate(Vector3.right * 0.1f);
         }

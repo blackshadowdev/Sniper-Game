@@ -28,32 +28,34 @@ public class Rifle : MonoBehaviour {
 
 	private VibrateController _vibrateController;
 	[SerializeField] private ParticleSystem _muzzleFlashPfx;
+	private BulletUI _bulletUi;
+	[SerializeField] private int _startingQuantityBullets;
+	private int _currentQuantityBullets;
 
     // Use this for initialization
     void Start() {
         _rifleCanFire = true;
-		_vibrateController = transform.GetComponent<VibrateController> ();
+		_currentQuantityBullets = _startingQuantityBullets;
+		_vibrateController = transform.GetComponent<VibrateController>();
+		_bulletUi = transform.GetComponent<BulletUI>();
     }
 
     // Update is called once per frame
     void Update() {
-       
+		Debug.Log("currentBullets = " + _currentQuantityBullets);
     }
 
     public void Fire() {
         if (_rifleCanFire) {
+			_rifleCanFire = false;
 			_vibrateController.VibrateForFiring ();
             _rifleAudioSource.PlayOneShot(_rifleShot);
 			_muzzleFlashPfx.Emit (1);
-           // _fired = true;
-           
-            //  SetBulletIcons();
+			_bulletUi.DecreaseBulletIcons();
+			_currentQuantityBullets --;
             _raycaster.Raycast();
-
-            _rifleCanFire = false;
-
         }
-    } // end of Fire() 
+    }
 
     public void ScopeSwitch() {
         // if Scope View, switch to Normal View
@@ -91,32 +93,13 @@ public class Rifle : MonoBehaviour {
     }
 
     public void MagazineReloaded() {
-        _bulletIcon1.enabled = true;
-        _bulletIcon2.enabled = true;
-        _bulletIcon3.enabled = true;
-        _bulletIcon4.enabled = true;
-        _rifleCanFire = true;
+		_bulletUi.RestoreBulletIcons();
+		_currentQuantityBullets = _startingQuantityBullets;
+		_rifleCanFire = true;
     }
-
-    public void SetBulletIcons() {
-        if (_bulletIcon4.enabled) {
-            _bulletIcon4.enabled = false;
-        }
-        else if (_bulletIcon3.enabled) {
-            _bulletIcon3.enabled = false;
-        }
-        else if (_bulletIcon2.enabled) {
-            _bulletIcon2.enabled = false;
-        }
-        else if (_bulletIcon1.enabled) {
-            _bulletIcon1.enabled = false;
-        }
-    }
-
-   
 
     public void TriggerUp() {
-        if (_bulletIcon1.enabled == false) {
+		if (_currentQuantityBullets <= 0) {
             _rifleAudioSource.PlayOneShot(_magazineReload);
             Invoke("MagazineReloaded", 3.7f);
         }
