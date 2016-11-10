@@ -12,7 +12,6 @@ public class Raycaster : MonoBehaviour
     public UIManager _UIManager;
     public Rifle _rifle;
 
-	[SerializeField] private SpawnWaves _spawnWaves;
 
     void Update() {
 
