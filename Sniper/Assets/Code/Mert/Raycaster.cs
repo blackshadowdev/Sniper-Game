@@ -12,6 +12,8 @@ public class Raycaster : MonoBehaviour
     public UIManager _UIManager;
     public Rifle _rifle;
 
+	[SerializeField] private SpawnWaves _spawnWaves;
+
     void Update() {
 
        // Raycast();
@@ -28,6 +30,7 @@ public class Raycaster : MonoBehaviour
                
 
                 if (_hit.transform.tag == "Enemy") {
+					//_hit.transform.GetComponent<AIControl>().Die();
                     _enemyManagerScript.KillEnemy(_hit.transform.gameObject);
                     Instantiate(_bloodPfxPrefab, _hit.point, Quaternion.identity);
                     _UIManager._bonusTime += 15;
