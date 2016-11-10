@@ -11,6 +11,9 @@ public class AIControl : MonoBehaviour
 	[SerializeField] private bool _typeCrouch;
 	[SerializeField] private bool _typeStrafe;
 	[SerializeField] private bool _typeBoss;
+	[SerializeField] private bool _typeVip;
+	[SerializeField] private bool _typeHunter;
+
 
 	[SerializeField] private Transform _waypoint1;					
 	[SerializeField] private Transform _waypoint2;
@@ -22,6 +25,8 @@ public class AIControl : MonoBehaviour
 	private bool _isAlive = true;
 	private bool _isStrafing;
 	private bool _imBusy;
+	private bool _vipIsWalking;
+
 
 	private bool _bossIsEntering;
 	private bool _bossMovingToWaypoint;
@@ -32,10 +37,25 @@ public class AIControl : MonoBehaviour
 	private AudioSource _audioSource;
 	private Animator _animator;
 
+	//for the Hunter
+	private bool _hunterIsWalking;
+	private bool _hunterShouldAttack;
+	private float _lastAttackTime;
+	[SerializeField] private Transform _myVipTarget;
+
+
+	// for the VIP
+	private int _timesHit;
+	[SerializeField] private Transform _myHunter;
+
+
+
+
 	private void Start()
 	{
 		_animator = transform.GetComponent<Animator>();
-		_bulletSpawner = transform.GetComponent<BulletSpawner>();
+		if (_typeCrouch || _typeStrafe || _typeHunter || _typeBoss)
+			_bulletSpawner = transform.GetComponent<BulletSpawner>();
 		_audioSource = transform.GetComponent<AudioSource>();
 		_currentWaypoint = new GameObject();
 
@@ -57,16 +77,40 @@ public class AIControl : MonoBehaviour
 		}
 
 		if (_typeCrouch)
-			_animator.SetTrigger("CrouchTrigger");												// these 2 triggers cause an error, but still function.  Object reference not set to an instance of an object.
+			_animator.SetTrigger("CrouchTrigger");												// these animation triggers cause an error, but still function.  Error = Object reference not set to an instance of an object.
+	
+		if (_typeVip)
+		{
+			transform.LookAt(_waypoint1);
+			_animator.SetTrigger("WalkTrigger");
+			_vipIsWalking = true;
+		}
+
+		if (_typeHunter)
+		{
+			transform.LookAt(_myVipTarget);
+			_animator.SetTrigger("WalkTrigger");
+			_hunterIsWalking = true;
+		}
 	}
 
 
 	private void Update()
 	{
-		if (_typeStrafe && _isStrafing)
-		{
+		if (_typeStrafe)
+			StrafeUpdate();
+		else if (_typeBoss)
+			BossUpdate();
+		else if (_typeVip)
+			VipUpdate();
+		else if (_typeHunter)
+			HunterUpdate();
+	}
 
-			// if near target waypoint, stand idle and switch waypoints
+	private void StrafeUpdate ()
+	{
+		if (_isStrafing)
+		{
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
 			{
 				_isStrafing = false;
@@ -85,10 +129,67 @@ public class AIControl : MonoBehaviour
 					StartCoroutine(PauseTellPauseFire());
 				}
 			}
-		} else if (_typeBoss)
+		} 
+	}
+		
+
+	private void HunterUpdate ()
+	{
+		if (_hunterIsWalking)
 		{
-			BossUpdate();
+			transform.LookAt(_myVipTarget);
+			if (Vector3.Distance(transform.position, _myVipTarget.position) < 2)
+			{
+					_hunterIsWalking = false;
+					_hunterShouldAttack = true;
+			}
 		}
+
+
+
+		if (_hunterShouldAttack)
+		{
+			if (Time.time - _lastAttackTime > 3)
+			{
+				transform.LookAt(_myVipTarget);
+				_animator.SetTrigger("HunterAttackTrigger");
+				_myVipTarget.transform.GetComponent<AIControl>().StartVipHitCoroutine();
+				_lastAttackTime = Time.time;
+			}
+		}
+	}
+
+	public void StartVipHitCoroutine ()
+	{
+		StartCoroutine(VipGetsHit());
+	}
+
+	public IEnumerator VipGetsHit ()
+	{
+		yield return new WaitForSeconds(0.3f);
+		_timesHit ++;
+		if (_timesHit < 3)
+			_animator.SetTrigger("GetHitTrigger");
+		else
+		{
+			_animator.SetTrigger("DeathTrigger");
+			_myHunter.transform.GetComponent<AIControl>()._hunterShouldAttack = false;
+		}
+	}
+
+	private void VipUpdate ()
+	{
+		if (_vipIsWalking)
+		{
+			transform.LookAt(_waypoint1);
+			if (Vector3.Distance(transform.position, _waypoint1.position) < 1)
+			{
+				_animator.SetTrigger("StandIdleTrigger");
+				_vipIsWalking = false;
+			}
+		}
+
+
 	}
 
 	private void BossUpdate ()
@@ -98,8 +199,6 @@ public class AIControl : MonoBehaviour
 			transform.LookAt(_currentWaypoint.transform.position);
 			if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
 			{
-				int _randBossAction = Random.Range(0,2);
-				//Debug.Log("boss rand action = " + _randBossAction);
 				if (!_imBusy)
 				{
 					_imBusy = true;
@@ -107,72 +206,45 @@ public class AIControl : MonoBehaviour
 					StopAllCoroutines();
 					StartCoroutine(BossFireSequence());
 				}
-					
-
-				/*
-				if (_randBossAction == 0)
-				{
-					StartCoroutine(BossFireSequence());
-				} else 
-				{
-					BossFindNewWaypoint();
-				}
-				*/
 			}
 
 			if (Time.time - _bossNewWaypointTime > 12)
 			{
 				if (!_imBusy)
 				{
-					//StopAllCoroutines();
 					Debug.Log("boss time out must fire");
-
 					StartCoroutine(BossFireSequence());
 					_imBusy = true;
 				}
-					
-				//BossFindNewWaypoint();
 			}
-				
 		}
-
 		else if (_bossIsEntering)
 		{
 			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
 			{
 				_bossIsEntering = false;
 				_animator.SetTrigger("SlowWalkTrigger");
-				//StopAllCoroutines();
-				//StartCoroutine(BossFireSequence());
-				//_imBusy = true;
 			}
 		}
-	}
+	} // end of BossUpdate()
 
 	private IEnumerator BossFireSequence ()
 	{
 		Debug.Log("starting boss fire sequence");
 		_imBusy = true;
 		_animator.SetTrigger("StandIdleTrigger");
-		//transform.LookAt(_player);
 		yield return new WaitForSeconds(0.5f);
 		Fire();
 		yield return new WaitForSeconds(0.5f);
 		BossFindNewWaypoint();
 
-
-
 		if (_bossHealth == 3)
-		{
 			_animator.SetTrigger("SlowWalkTrigger");
-		}
 		else if (_bossHealth == 2)
-		{
 			_animator.SetTrigger("WalkTrigger");
-		} else if (_bossHealth == 1)
-		{
+		else if (_bossHealth == 1)
 			_animator.SetTrigger("RunTrigger");
-		}
+		
 
 		_imBusy = false;
 	}
@@ -273,7 +345,6 @@ public class AIControl : MonoBehaviour
 			}
 			BossFindNewWaypoint();
 		}
-
 	}
 
 

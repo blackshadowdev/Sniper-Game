@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour {
 	public List<GameObject> _activeEnemies;							// made this public so that SpotterTool can access it.
 	[SerializeField] private List<GameObject> _firstWave;
 	[SerializeField] private List<GameObject> _secondWave;
+	[SerializeField] private List<GameObject> _secondSpecials;
 
 	void Start () {
 	}
@@ -25,7 +26,7 @@ public class EnemyManager : MonoBehaviour {
 
 		if (Time.time - _startTime > 1 && _lastWaveSpawned == 0)
 		{
-			SpawnWave(_firstWave);
+			SpawnWave(_firstWave, true);
 			_lastWaveSpawned = 1;
 		}
 
@@ -38,12 +39,13 @@ public class EnemyManager : MonoBehaviour {
 		_thisEnemyScript.TakeAction();
 	}
 
-	private void SpawnWave (List<GameObject> _thisWave)
+	private void SpawnWave (List<GameObject> _thisWave, bool _addToActiveEnemiesList)
 	{
 		for (int i = 0; i < _thisWave.Count; i ++)
 		{
 			_thisWave[i].SetActive(true);
-			_activeEnemies.Add(_thisWave [i]);
+			if (_addToActiveEnemiesList)
+				_activeEnemies.Add(_thisWave [i]);
 		}
 	}
 
@@ -53,7 +55,8 @@ public class EnemyManager : MonoBehaviour {
 		_activeEnemies.Remove(_hitEnemy);
 		if (_activeEnemies.Count == 0 && _lastWaveSpawned == 1)
 		{
-			SpawnWave(_secondWave);
+			SpawnWave(_secondWave, true);
+			SpawnWave(_secondSpecials, false);
 			_lastWaveSpawned = 2;
 		}
 	}
