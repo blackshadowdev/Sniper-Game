@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour {
 		else if (_heartIcon1.enabled) {
 			_heartIcon1.enabled = false;
 			// TODO: move thıs functıonalıty to a scene loader scrıpt
-			if (Application.loadedLevelName == "Cartoon City 1")
+			if (Application.loadedLevelName == "Cartoon City 1" || Application.loadedLevelName == "Lunch Interrupted")
 				SceneManager.LoadScene("YouDied");
 		}
 	}
