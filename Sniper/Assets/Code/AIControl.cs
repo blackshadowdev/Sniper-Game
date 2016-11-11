@@ -235,7 +235,6 @@ public class AIControl : MonoBehaviour
 
 	private IEnumerator BossFireSequence ()
 	{
-		Debug.Log("starting boss fire sequence");
 		_imBusy = true;
 		_animator.SetTrigger("StandIdleTrigger");
 		yield return new WaitForSeconds(0.5f);
@@ -243,15 +242,11 @@ public class AIControl : MonoBehaviour
 		yield return new WaitForSeconds(0.5f);
 		BossFindNewWaypoint();
 		BossResumeMoving();
-
-		
-
 		_imBusy = false;
 	}
 
 	private void BossFindNewWaypoint ()
 	{
-		Debug.Log("boss found a new waypoint");
 		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
 		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
@@ -260,18 +255,12 @@ public class AIControl : MonoBehaviour
 
 	private void BossResumeMoving ()
 	{
-		Debug.Log("BossResumeMoving() called");
-		Debug.Log("boss health = " + _bossHealth);
-		//StopAllCoroutines();
-
-
 		if (_bossHealth == 3)
 			_animator.SetTrigger("SlowWalkTrigger");
 		else if (_bossHealth == 2)
 			_animator.SetTrigger("WalkTrigger");
 		else if (_bossHealth == 1)
-			_animator.SetTrigger("RunTrigger");
-		
+			_animator.SetTrigger("RunTrigger");	
 	}
 
 	public void TakeAction ()
@@ -346,7 +335,9 @@ public class AIControl : MonoBehaviour
 			_animator.SetTrigger("DeathTrigger");	
 		} else if (_typeBoss)
 		{
+			_imBusy = false;
 			_bossHealth--;
+			/*
 			if (_bossHealth == 2)
 			{
 				_animator.SetTrigger("WalkTrigger");
@@ -360,6 +351,16 @@ public class AIControl : MonoBehaviour
 				Debug.Log ("boss ıs dead");
 			}
 			BossFindNewWaypoint();
+			*/
+
+			_animator.SetTrigger("GetHitTrigger");
+			if (_bossHealth > 0)
+			{
+				StartCoroutine(BossWaitThenResumeMoving());
+			} else {
+				_animator.SetTrigger("DeathTrigger");
+				Invoke ("TempEndLevel", 2);
+			}
 		}
 	}
 
@@ -389,7 +390,6 @@ public class AIControl : MonoBehaviour
 			if (_typeBoss)
 			{
 				_animator.SetTrigger("RollBackTrigger");
-				//BossFindNewWaypoint(); //we need a pause here so that roll animation can play, then make boss walk/run to next waypoint
 				StartCoroutine(BossWaitThenResumeMoving());
 			}
 				
