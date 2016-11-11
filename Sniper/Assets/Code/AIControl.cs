@@ -218,44 +218,49 @@ public class AIControl : MonoBehaviour
 				}
 			}
 		}
+
+
+
+
 		else if (_bossIsEntering)
 		{
 			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
 			{
 				_bossIsEntering = false;
-				_animator.SetTrigger("SlowWalkTrigger");
+				StartCoroutine(BossFireSequence());
+
 			}
 		}
 	} // end of BossUpdate()
 
 	private IEnumerator BossFireSequence ()
 	{
-		Debug.Log("starting boss fire sequence");
 		_imBusy = true;
 		_animator.SetTrigger("StandIdleTrigger");
 		yield return new WaitForSeconds(0.5f);
 		Fire();
 		yield return new WaitForSeconds(0.5f);
 		BossFindNewWaypoint();
-
-		if (_bossHealth == 3)
-			_animator.SetTrigger("SlowWalkTrigger");
-		else if (_bossHealth == 2)
-			_animator.SetTrigger("WalkTrigger");
-		else if (_bossHealth == 1)
-			_animator.SetTrigger("RunTrigger");
-		
-
+		BossResumeMoving();
 		_imBusy = false;
 	}
 
 	private void BossFindNewWaypoint ()
 	{
-		Debug.Log("boss found a new waypoint");
 		float _tempX = _waypoint1.position.x + Random.Range(-10,10);
 		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
 		_bossNewWaypointTime = Time.time;
+	}
+
+	private void BossResumeMoving ()
+	{
+		if (_bossHealth == 3)
+			_animator.SetTrigger("SlowWalkTrigger");
+		else if (_bossHealth == 2)
+			_animator.SetTrigger("WalkTrigger");
+		else if (_bossHealth == 1)
+			_animator.SetTrigger("RunTrigger");	
 	}
 
 	public void TakeAction ()
@@ -330,7 +335,9 @@ public class AIControl : MonoBehaviour
 			_animator.SetTrigger("DeathTrigger");	
 		} else if (_typeBoss)
 		{
+			_imBusy = false;
 			_bossHealth--;
+			/*
 			if (_bossHealth == 2)
 			{
 				_animator.SetTrigger("WalkTrigger");
@@ -344,6 +351,16 @@ public class AIControl : MonoBehaviour
 				Debug.Log ("boss ıs dead");
 			}
 			BossFindNewWaypoint();
+			*/
+
+			_animator.SetTrigger("GetHitTrigger");
+			if (_bossHealth > 0)
+			{
+				StartCoroutine(BossWaitThenResumeMoving());
+			} else {
+				_animator.SetTrigger("DeathTrigger");
+				Invoke ("TempEndLevel", 2);
+			}
 		}
 	}
 
@@ -364,13 +381,29 @@ public class AIControl : MonoBehaviour
 		return relativePosition;
 	}
 
-	/*
+
 	void OnCollisionEnter (Collision collision)
 	{
-		if (_typeBoss)
-			BossFindNewWaypoint();
+		
+		if (collision.gameObject.tag != "Floor" && collision.gameObject.tag != "Bullet")
+		{
+			if (_typeBoss)
+			{
+				_animator.SetTrigger("RollBackTrigger");
+				StartCoroutine(BossWaitThenResumeMoving());
+			}
+				
+		}
+
 	}
-	*/
+
+	private IEnumerator BossWaitThenResumeMoving ()
+	{
+		yield return new WaitForSeconds(1);
+		BossFindNewWaypoint();
+		BossResumeMoving();
+	}
+
 
 
 }
