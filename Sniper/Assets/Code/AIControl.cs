@@ -218,12 +218,17 @@ public class AIControl : MonoBehaviour
 				}
 			}
 		}
+
+
+
+
 		else if (_bossIsEntering)
 		{
 			if (Vector3.Distance(transform.position, _waypoint1.transform.position) < 1)
 			{
 				_bossIsEntering = false;
-				_animator.SetTrigger("SlowWalkTrigger");
+				StartCoroutine(BossFireSequence());
+
 			}
 		}
 	} // end of BossUpdate()
@@ -237,13 +242,8 @@ public class AIControl : MonoBehaviour
 		Fire();
 		yield return new WaitForSeconds(0.5f);
 		BossFindNewWaypoint();
+		BossResumeMoving();
 
-		if (_bossHealth == 3)
-			_animator.SetTrigger("SlowWalkTrigger");
-		else if (_bossHealth == 2)
-			_animator.SetTrigger("WalkTrigger");
-		else if (_bossHealth == 1)
-			_animator.SetTrigger("RunTrigger");
 		
 
 		_imBusy = false;
@@ -256,6 +256,22 @@ public class AIControl : MonoBehaviour
 		float _tempZ = _waypoint1.position.z + Random.Range(-10,10);
 		_currentWaypoint.transform.position = new Vector3(_tempX, _waypoint1.position.y, _tempZ);
 		_bossNewWaypointTime = Time.time;
+	}
+
+	private void BossResumeMoving ()
+	{
+		Debug.Log("BossResumeMoving() called");
+		Debug.Log("boss health = " + _bossHealth);
+		//StopAllCoroutines();
+
+
+		if (_bossHealth == 3)
+			_animator.SetTrigger("SlowWalkTrigger");
+		else if (_bossHealth == 2)
+			_animator.SetTrigger("WalkTrigger");
+		else if (_bossHealth == 1)
+			_animator.SetTrigger("RunTrigger");
+		
 	}
 
 	public void TakeAction ()
@@ -364,13 +380,30 @@ public class AIControl : MonoBehaviour
 		return relativePosition;
 	}
 
-	/*
+
 	void OnCollisionEnter (Collision collision)
 	{
-		if (_typeBoss)
-			BossFindNewWaypoint();
+		
+		if (collision.gameObject.tag != "Floor" && collision.gameObject.tag != "Bullet")
+		{
+			if (_typeBoss)
+			{
+				_animator.SetTrigger("RollBackTrigger");
+				//BossFindNewWaypoint(); //we need a pause here so that roll animation can play, then make boss walk/run to next waypoint
+				StartCoroutine(BossWaitThenResumeMoving());
+			}
+				
+		}
+
 	}
-	*/
+
+	private IEnumerator BossWaitThenResumeMoving ()
+	{
+		yield return new WaitForSeconds(1);
+		BossFindNewWaypoint();
+		BossResumeMoving();
+	}
+
 
 
 }

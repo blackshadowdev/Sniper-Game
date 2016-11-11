@@ -8,6 +8,10 @@ TagManager:
   - Bullet
   - Cover
   - Civilian
+  - Ladder
+  - LadderLandingPad
+  - Collide
+  - Floor
   layers:
   - Default
   - TransparentFX
