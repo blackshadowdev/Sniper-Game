@@ -625,6 +625,8 @@ GameObject:
   - 136: {fileID: 136000012165876164}
   - 114: {fileID: 114000014044342824}
   - 114: {fileID: 114000013251690618}
+  - 114: {fileID: 114000010681173278}
+  - 114: {fileID: 114000011595566936}
   - 82: {fileID: 82000013015177888}
   m_Layer: 0
   m_Name: Hunter
@@ -1833,6 +1835,32 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010681173278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012996356080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618b519fcdce3054d823bf384d1eeb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHealth: 1
+  _maxHealth: 1
+--- !u!114 &114000011595566936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012996356080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddb8fdfffb7275428c327e459e9f1cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stoppingDistance: 1
+  _waypoints: []
 --- !u!114 &114000013251690618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1859,16 +1887,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012996356080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ccd3d333bfee46608606a8116601480, type: 3}
+  m_Script: {fileID: 11500000, guid: b1c635a6624a98342aceecc16400d345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tellAudioClip: {fileID: 8300000, guid: 02a0e6f9f7a4648cfbf5bfeadef50cba, type: 3}
   _player: {fileID: 0}
-  _typeCrouch: 0
-  _typeStrafe: 0
-  _typeBoss: 0
-  _typeVip: 1
-  _typeHunter: 0
   _waypoint1: {fileID: 0}
   _waypoint2: {fileID: 0}
   _waypiont3: {fileID: 0}

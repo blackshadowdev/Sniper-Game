@@ -778,6 +778,7 @@ GameObject:
   - 54: {fileID: 54000013264411480}
   - 136: {fileID: 136000012965526396}
   - 114: {fileID: 114000010476951590}
+  - 114: {fileID: 114000013068196514}
   m_Layer: 0
   m_Name: RPG-Character
   m_TagString: Enemy
@@ -1766,22 +1767,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013439368044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ccd3d333bfee46608606a8116601480, type: 3}
+  m_Script: {fileID: 11500000, guid: 390ce45369ded4e4eb898d1b7348ecba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  _bulletPrefab: {fileID: 4000010170401598, guid: 5281b895dec1d433cbe5ef1f4e73ebf7,
-    type: 2}
-  _bulletSpawnPos: {fileID: 4000014004996666}
-  _muzzleFlashPfx: {fileID: 198000012838121960}
-  _gunAudioSource: {fileID: 82000013555667376}
-  _gunAudioclip: {fileID: 8300000, guid: 3cb2b080b84cf401c8e722839ad82296, type: 3}
-  _tellAudioClip: {fileID: 8300000, guid: 02a0e6f9f7a4648cfbf5bfeadef50cba, type: 3}
   _player: {fileID: 0}
-  _isAlive: 1
-  _animator: {fileID: 95000011386019476}
-  _myType: StandFireCrouch
-  _currentWaypoint: {fileID: 0}
+  _waypoint1: {fileID: 0}
+  _waypoint2: {fileID: 0}
+  _waypiont3: {fileID: 0}
+  _waypoint4: {fileID: 0}
+  _tellAudioClip: {fileID: 0}
 --- !u!114 &114000011265677762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1805,6 +1799,19 @@ MonoBehaviour:
   runSpeed: 8
   knockbackMultiplier: 7
   _crouch: 1
+--- !u!114 &114000013068196514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013439368044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618b519fcdce3054d823bf384d1eeb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHealth: 1
+  _maxHealth: 1
 --- !u!136 &136000012965526396
 CapsuleCollider:
   m_ObjectHideFlags: 1

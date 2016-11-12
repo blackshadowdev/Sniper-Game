@@ -323,8 +323,9 @@ GameObject:
   - 95: {fileID: 95000010603256506}
   - 54: {fileID: 54000010040672386}
   - 136: {fileID: 136000011942945742}
-  - 114: {fileID: 114000012872459386}
   - 114: {fileID: 114000013378341110}
+  - 114: {fileID: 114000012549381094}
+  - 114: {fileID: 114000011676281284}
   m_Layer: 0
   m_Name: Civilian
   m_TagString: Civilian
@@ -1759,28 +1760,32 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000012872459386
+--- !u!114 &114000011676281284
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012032513936}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ccd3d333bfee46608606a8116601480, type: 3}
+  m_Script: {fileID: 11500000, guid: eddb8fdfffb7275428c327e459e9f1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  _bulletPrefab: {fileID: 4000010170401598, guid: 5281b895dec1d433cbe5ef1f4e73ebf7,
-    type: 2}
-  _bulletSpawnPos: {fileID: 4000010587992624}
-  _muzzleFlashPfx: {fileID: 198000010255481672}
-  _gunAudioSource: {fileID: 82000010481220036}
-  _gunAudioclip: {fileID: 8300000, guid: 3cb2b080b84cf401c8e722839ad82296, type: 3}
-  _tellAudioClip: {fileID: 8300000, guid: 02a0e6f9f7a4648cfbf5bfeadef50cba, type: 3}
-  _player: {fileID: 0}
-  _isAlive: 1
-  _characterController: {fileID: 114000013658017390}
+  _stoppingDistance: 1
+  _waypoints: []
+--- !u!114 &114000012549381094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012032513936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eda473ca2c99ed42954617aea4e19c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHealth: 1
+  _maxHealth: 1
 --- !u!114 &114000013378341110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1792,7 +1797,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7892654d6449348e4a6e6cf1eb313e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 0}
+  _waypoint1: {fileID: 0}
+  _waypoint2: {fileID: 0}
+  _shouldRun: 1
+  _centerPoint: {fileID: 0}
 --- !u!114 &114000013658017390
 MonoBehaviour:
   m_ObjectHideFlags: 1
