@@ -15,5 +15,6 @@ public class EnemyHealth : BaseHealth
     protected override void OnDie()
     {
         EnemyDieEvent(this);
+        gameObject.SetActive(false);
     }
 }

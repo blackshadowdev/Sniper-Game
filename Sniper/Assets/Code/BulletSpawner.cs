@@ -8,19 +8,10 @@ public class BulletSpawner : MonoBehaviour {
 	[SerializeField] private ParticleSystem _muzzleFlashPfx;
 	[SerializeField] private AudioSource _gunAudioSource;
 	[SerializeField] private AudioClip _gunAudioClip;
-	[SerializeField] private Transform _player;
-
-	void Start () {
-	
-	}
-
-	void Update () {
-	
-	}
 
 	public void Fire ()
 	{
-		_bulletSpawnPos.LookAt(_player);														
+		_bulletSpawnPos.LookAt(PlayerHead.Ins.transform);														
 		Instantiate(_bulletPrefab, _bulletSpawnPos.position, _bulletSpawnPos.rotation);			
 		_muzzleFlashPfx.Emit(10);																
 		_gunAudioSource.PlayOneShot(_gunAudioClip);												

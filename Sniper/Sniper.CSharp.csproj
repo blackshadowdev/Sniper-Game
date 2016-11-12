@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.2f2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -102,6 +104,7 @@
     <Compile Include="Assets\Code\Characters\Enemies\StrafingEnemyAI.cs" />
     <Compile Include="Assets\Code\Characters\Interaction\BaseHealth.cs" />
     <Compile Include="Assets\Code\Characters\Interaction\DamageInfo.cs" />
+    <Compile Include="Assets\Code\Characters\Player\PlayerHead.cs" />
     <Compile Include="Assets\Code\Characters\RagdollCreator.cs" />
     <Compile Include="Assets\Code\Characters\WaypointNavigator.cs" />
     <Compile Include="Assets\Code\CivilianAI.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="Assets\Code\Mert\Rifle.cs" />
     <Compile Include="Assets\Code\Mert\UIManager.cs" />
     <Compile Include="Assets\Code\Mert\ViveControllerLaptop.cs" />
+    <Compile Include="Assets\Code\Misc\Singleton.cs" />
     <Compile Include="Assets\Code\PlayerHealth.cs" />
     <Compile Include="Assets\Code\PlayerHealthTrigger.cs" />
     <Compile Include="Assets\Code\Scope.cs" />

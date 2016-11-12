@@ -15,5 +15,6 @@ public class CivilianHealth : BaseHealth
     protected override void OnDie()
     {
         CivilianDieEvent(this);
+        gameObject.SetActive(false);
     }
 }
