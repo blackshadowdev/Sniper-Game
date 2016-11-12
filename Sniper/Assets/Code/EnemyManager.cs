@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour {
@@ -35,7 +34,7 @@ public class EnemyManager : MonoBehaviour {
 	private void TakeAction ()
 	{
 		_timeLastAction = Time.time;
-		AIControl _thisEnemyScript = _activeEnemies[Random.Range(0, _activeEnemies.Count)].GetComponent<AIControl>();
+		BaseAI _thisEnemyScript = _activeEnemies[Random.Range(0, _activeEnemies.Count)].GetComponent<BaseAI>();
 		_thisEnemyScript.TakeAction();
 	}
 
@@ -51,7 +50,10 @@ public class EnemyManager : MonoBehaviour {
 
 	public void KillEnemy (GameObject _hitEnemy)
 	{
-		_hitEnemy.GetComponent<AIControl>().Die();
+	    var enemyHealth = _hitEnemy.GetComponent<IHealth>();
+	    var info = new DamageInfo(enemyHealth.CurrentHealth);
+	    _hitEnemy.GetComponent<IDamageable>().Damage(info);
+
 		_activeEnemies.Remove(_hitEnemy);
 		if (_activeEnemies.Count == 0 && _lastWaveSpawned == 1)
 		{

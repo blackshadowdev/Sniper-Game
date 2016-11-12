@@ -1,69 +1,53 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class CivilianAI : MonoBehaviour {
+public class CivilianAI : BaseAI
+{
+    private Transform _centerPoint = null;
+    private float _lastFindWaypointTime;
 
+    public void Die()
+    {
+        Animator.SetTrigger("DeathTrigger");
+    }
 
-	private Rigidbody _rb;
-	private Animator _animator;
-	public Transform _waypoint1;
-	public Transform _waypoint2;
-	public bool _shouldRun = true;
-	private GameObject _currentWaypoint;
-	private float _lastFindWaypointTime;
-	public Transform _centerPoint;
+    protected override void OnEnable()
+    {
+        FindNewWaypoint();
+    }
 
+    protected override void OnTakeAction()
+    {
+    }
 
-	// Use this for initialization
-	void Start () {
-		_currentWaypoint = new GameObject();
-		_animator = GetComponentInChildren<Animator>();
-		_rb = GetComponent<Rigidbody>();
+    protected override void OnUpdate()
+    {
+        transform.LookAt(WaypointNavigator.CurrentWaypoint);
+        if (WaypointNavigator.InStoppingDistance || (Time.time - _lastFindWaypointTime > 15f))
+        {
+            FindNewWaypoint();
+        }
+    }
 
-		_currentWaypoint.transform.position = new Vector3(0,0,0);							// necessary to initialize bot if running between 2 waypoints
+    protected override void OnDamage(DamageInfo info)
+    {
+    }
 
-		FindNewWaypoint();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		transform.LookAt(_currentWaypoint.transform);
-		if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1 || Time.time - _lastFindWaypointTime > 15)
-		{
-			FindNewWaypoint();
-		}
-	
-		//ControlMotion();
-	}
+    protected override void OnDie()
+    {
+    }
 
-	public void ControlMotion ()
-	{
-		/*
-		transform.LookAt(_currentWaypoint.transform);
-		if (Vector3.Distance(transform.position, _currentWaypoint.transform.position) < 1)
-		{
-			if (_currentWaypoint == _waypoint1)
-				_currentWaypoint = _waypoint2;
-			else
-				_currentWaypoint = _waypoint1;
-		}
-		*/
-	}
+    private void OnCollisionEnter(Collision collision)
+    {
+        FindNewWaypoint();
+    }
 
-	public void Die ()
-	{
-		_animator.SetTrigger("DeathTrigger");
+    private void FindNewWaypoint()
+    {
+        var waypoint = WaypointNavigator.CurrentWaypoint;
 
-	}
+        waypoint.position = new Vector3(_centerPoint.position.x + Random.Range(-50f, 50f), 0f,
+            _centerPoint.position.y + Random.Range(-50f, 50f));
 
-	void OnCollisionEnter (Collision collision)
-	{
-		FindNewWaypoint();
-	}
-		
-	private void FindNewWaypoint ()
-	{
-		_currentWaypoint.transform.position = new Vector3 (_centerPoint.position.x + Random.Range(-50,50), 0, _centerPoint.position.y + Random.Range(-50,50));
-		_lastFindWaypointTime = Time.time;
-	}
+        _lastFindWaypointTime = Time.time;
+    }
 }
