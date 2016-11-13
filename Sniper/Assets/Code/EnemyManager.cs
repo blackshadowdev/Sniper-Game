@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour {
 
+    private int _numberOfKills;
 	private float _startTime;
 	private float _elapsedTime;
 	private float _timeLastAction;
@@ -12,11 +13,11 @@ public class EnemyManager : MonoBehaviour {
 	[SerializeField] private List<GameObject> _firstWave;
 	[SerializeField] private List<GameObject> _secondWave;
 	[SerializeField] private List<GameObject> _secondSpecials;
+    [SerializeField] private UIManager _UIManager;
 
-	void Start () {
-	}
-	
-	void Update () {
+    public Transform _bloodPfxPrefab;
+
+    void Update () {
 		
 		if (Time.time - _timeLastAction > _actionTimer)
 		{
@@ -48,18 +49,37 @@ public class EnemyManager : MonoBehaviour {
 		}
 	}
 
-	public void KillEnemy (GameObject _hitEnemy)
+	public void KillEnemy (InteractiveItem _enemy)
 	{
-	    var enemyHealth = _hitEnemy.GetComponent<IHealth>();
-	    var info = new DamageInfo(enemyHealth.CurrentHealth);
-	    _hitEnemy.GetComponent<IDamageable>().Damage(info);
+        if (_enemy) {
+            Instantiate(_bloodPfxPrefab, _enemy.transform.position, Quaternion.identity);
+            var enemyHealth = _enemy.GetComponent<IHealth>();
+            var info = new DamageInfo(enemyHealth.CurrentHealth);
+            _enemy.GetComponent<IDamageable>().Damage(info);
+            _numberOfKills++;
+            PlayerPrefs.SetInt("kills", GetNumberOfKills());
+            _activeEnemies.Remove(_enemy.gameObject);
+            if (_activeEnemies.Count == 0 && _lastWaveSpawned == 1) {
+                SpawnWave(_secondWave, true);
+                SpawnWave(_secondSpecials, false);
+                _lastWaveSpawned = 2;
+            }
 
-		_activeEnemies.Remove(_hitEnemy);
-		if (_activeEnemies.Count == 0 && _lastWaveSpawned == 1)
-		{
-			SpawnWave(_secondWave, true);
-			SpawnWave(_secondSpecials, false);
-			_lastWaveSpawned = 2;
-		}
+            UpdatePlayerData();
+        }
 	}
+
+    public int GetNumberOfKills() {
+        return _numberOfKills;
+    }
+
+    public void UpdatePlayerData() {
+        _UIManager._bonusTime += 15;
+        _UIManager._timerPfx.Emit(50);
+        _UIManager._playerScore += 250;
+        _UIManager._scoreText.text = _UIManager._playerScore.ToString();
+        _UIManager._scorePFX.Emit(50);
+
+
+    }
 }

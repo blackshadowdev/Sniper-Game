@@ -5,7 +5,8 @@ public class InteractiveItem : MonoBehaviour {
 
     public event Action OnShoot;            //Called when the item is shot
 
-	public void ShootMenuItem() {
+	public void ShootItem() {
+
         if (OnShoot != null)
             OnShoot();
     }
