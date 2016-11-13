@@ -31,5 +31,15 @@ public class UIManager : MonoBehaviour {
     void Update() {
         _elapsedTime = 100 - Time.time + _startTime + _bonusTime;
         _timerText.text = _elapsedTime.ToString();
+        PlayerPrefs.SetInt("score", GetCurrentScore());
+        PlayerPrefs.SetFloat("time", GetCurrentTime());
+    }
+
+    public int GetCurrentScore() {
+        return _playerScore;
+    }
+
+    public float GetCurrentTime() {
+        return _elapsedTime;
     }
 }

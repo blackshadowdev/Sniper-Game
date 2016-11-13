@@ -4,10 +4,12 @@ public class CivilianAI : BaseAI
 {
     private Transform _centerPoint = null;
     private float _lastFindWaypointTime;
-
-    public void Die()
+    [SerializeField] private UIManager _manager;
+    
+    public void Die(InteractiveItem _civilian)
     {
         Animator.SetTrigger("DeathTrigger");
+        UpdatePlayerData();
     }
 
     protected override void OnEnable()
@@ -49,5 +51,11 @@ public class CivilianAI : BaseAI
             _centerPoint.position.y + Random.Range(-50f, 50f));
 
         _lastFindWaypointTime = Time.time;
+    }
+
+    private void UpdatePlayerData() {
+        _manager._playerScore -= 500;
+        _manager._scoreText.text = _manager._playerScore.ToString();
+        _manager._scorePFX.Emit(50);
     }
 }
