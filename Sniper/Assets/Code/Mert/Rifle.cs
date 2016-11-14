@@ -24,6 +24,8 @@ public class Rifle : MonoBehaviour {
 	[SerializeField] private int _startingQuantityBullets;
 	private int _currentQuantityBullets;
 
+	private bool _busyReloading;
+
     // Use this for initialization
     void Start() {
         _rifleCanFire = true;
@@ -49,28 +51,35 @@ public class Rifle : MonoBehaviour {
     }
 
     public void RoundChambered() {
-        _rifleCanFire = true;
+		_rifleCanFire = true;
     }
 
     public void MagazineReloaded() {
 		_bulletUi.RestoreBulletIcons();
 		_currentQuantityBullets = _startingQuantityBullets;
 		_rifleCanFire = true;
+		_busyReloading = false;
     }
 
     public void TriggerUp() {
 		if (_currentQuantityBullets <= 0) {
+			_busyReloading = true;
             _rifleAudioSource.PlayOneShot(_magazineReload);
             Invoke("MagazineReloaded", 3.7f);
         }
-        else {
-            _rifleAudioSource.PlayOneShot(_rifleChamber);
-            Invoke("RoundChambered", 1);
+        else 
+		{
+			if (_busyReloading == false)
+			{
+				_rifleAudioSource.PlayOneShot(_rifleChamber);
+				Invoke("RoundChambered", 1);	
+			}
         }
     }
 
 	public void ReloadNow() {
 		_rifleCanFire = false;
+		_busyReloading = true;
 		_rifleAudioSource.PlayOneShot(_magazineReload);
 		Invoke("MagazineReloaded", 3.7f);
 	}
