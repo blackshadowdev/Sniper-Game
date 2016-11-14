@@ -24,8 +24,7 @@ public class pivotRifle : MonoBehaviour {
 	{
 		if (_usingTwoHands)
 			transform.LookAt(_leftController);
-		else
-			transform.rotation = _startingRotation;
+		
 
 		#if UNITY_EDITOR
 		_leftController.Translate(Vector3.right * Input.GetAxis("Mouse X") * 0.1f);
@@ -35,8 +34,13 @@ public class pivotRifle : MonoBehaviour {
 
 	public void OneOrTwoHands ()
 	{
-		if (_usingTwoHands)
+		if (_usingTwoHands) {
 			_usingTwoHands = false;
+			//transform.localRotation = _startingRotation;
+			transform.localEulerAngles = new Vector3(45,0,0);
+		}
+
+
 		else
 			_usingTwoHands = true;
 	}
