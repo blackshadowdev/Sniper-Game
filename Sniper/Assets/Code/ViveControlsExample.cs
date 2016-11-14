@@ -51,6 +51,11 @@ public class ViveControlsExample : MonoBehaviour {
 			_scope.ScopeSwitch();
 
 		}
+
+		if (_leftOrRight == "right")
+		{
+			_rifle.ReloadNow();
+		}
 	}
 
 

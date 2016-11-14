@@ -37,7 +37,7 @@ public class Rifle : MonoBehaviour {
     }
 
     public void Fire() {
-        if (_rifleCanFire) {
+		if (_rifleCanFire && _currentQuantityBullets > 0) {
 			_rifleCanFire = false;
 			_vibrateController.VibrateForFiring ();
             _rifleAudioSource.PlayOneShot(_rifleShot);
@@ -68,4 +68,10 @@ public class Rifle : MonoBehaviour {
             Invoke("RoundChambered", 1);
         }
     }
+
+	public void ReloadNow() {
+		_rifleCanFire = false;
+		_rifleAudioSource.PlayOneShot(_magazineReload);
+		Invoke("MagazineReloaded", 3.7f);
+	}
 }
