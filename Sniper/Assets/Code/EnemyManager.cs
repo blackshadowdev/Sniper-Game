@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour {
 	[SerializeField] private float _actionTimer;
 	public List<GameObject> _activeEnemies;							// made this public so that SpotterTool can access it.
 	[SerializeField] private List<GameObject> _firstWave;
+	[SerializeField] private List<GameObject> _firstSpecials;
 	[SerializeField] private List<GameObject> _secondWave;
 	[SerializeField] private List<GameObject> _secondSpecials;
     [SerializeField] private UIManager _UIManager;
@@ -27,6 +28,7 @@ public class EnemyManager : MonoBehaviour {
 		if (Time.time - _startTime > 1 && _lastWaveSpawned == 0)
 		{
 			SpawnWave(_firstWave, true);
+			SpawnWave(_firstSpecials, false);
 			_lastWaveSpawned = 1;
 		}
 

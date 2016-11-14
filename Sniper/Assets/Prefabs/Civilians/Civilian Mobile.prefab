@@ -533,13 +533,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013306590706}
-  - 114: {fileID: 114000012744824786}
   - 95: {fileID: 95000010469713086}
   - 54: {fileID: 54000011281394648}
   - 136: {fileID: 136000010078210322}
   - 114: {fileID: 114000012984358636}
   - 114: {fileID: 114000012736915664}
   - 114: {fileID: 114000010888671596}
+  - 114: {fileID: 114000010246930630}
   m_Layer: 0
   m_Name: Civilian Mobile
   m_TagString: Civilian
@@ -1354,10 +1354,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012501808676}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 10.29, y: -9.613096e-17, z: 8.41}
-  m_LocalScale: {x: 0.6641948, y: 0.66419494, z: 0.66419494}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.8, y: 0, z: 0.6}
+  m_LocalScale: {x: 0.66, y: 0.66, z: 0.66}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010978901286}
   - {fileID: 4000010337470258}
@@ -1752,7 +1752,7 @@ Animator:
   m_GameObject: {fileID: 1000012501808676}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e42d9259129992a4d95e0b320ca2a43d, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7ca23f1dea0fe4c5b8a7f4457602988e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2b0577c94d9794e1ca392aff591d58ce, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -1760,6 +1760,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010246930630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012501808676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1dbfead45be9b4da82562533d270f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000010888671596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1786,29 +1797,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startHealth: 1
   _maxHealth: 1
---- !u!114 &114000012744824786
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012501808676}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad159c285c6e6ae4caa1641e7eff37c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  sceneCamera: {fileID: 0}
-  gravity: -9.8
-  jumpSpeed: 9
-  doublejumpSpeed: 10
-  inAirSpeed: 8
-  rollSpeed: 8
-  rollduration: 0.5
-  walkSpeed: 2
-  runSpeed: 8
-  knockbackMultiplier: 7
-  _crouch: 0
 --- !u!114 &114000012984358636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1820,6 +1808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7892654d6449348e4a6e6cf1eb313e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _centerPoint: {fileID: 0}
+  _manager: {fileID: 0}
 --- !u!136 &136000010078210322
 CapsuleCollider:
   m_ObjectHideFlags: 1
