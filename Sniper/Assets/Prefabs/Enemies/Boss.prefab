@@ -118,6 +118,7 @@ GameObject:
   - 114: {fileID: 114000013064758652}
   - 82: {fileID: 82000010330535502}
   - 114: {fileID: 114000010051603934}
+  - 114: {fileID: 114000011457325934}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -1862,6 +1863,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startHealth: 1
   _maxHealth: 1
+--- !u!114 &114000011457325934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010594327946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1dbfead45be9b4da82562533d270f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011775512698
 MonoBehaviour:
   m_ObjectHideFlags: 1

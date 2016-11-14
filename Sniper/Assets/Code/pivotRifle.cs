@@ -9,6 +9,7 @@ public class pivotRifle : MonoBehaviour {
 
 
 	public Transform _leftController;
+	[SerializeField] Transform _camera;
 	private bool _usingTwoHands;
 	private Quaternion _startingRotation;
 
@@ -27,7 +28,8 @@ public class pivotRifle : MonoBehaviour {
 		
 
 		#if UNITY_EDITOR
-		_leftController.Translate(Vector3.right * Input.GetAxis("Mouse X") * 0.1f);
+		_leftController.RotateAround(_camera.position, Vector3.up, Input.GetAxis("Mouse X"));
+		//_leftController.Translate(Vector3.right * Input.GetAxis("Mouse X") * 0.1f);
 		_leftController.Translate(Vector3.up * Input.GetAxis("Mouse Y") * 0.1f);
 		#endif
 	}

@@ -569,6 +569,7 @@ GameObject:
   - 114: {fileID: 114000012117989140}
   - 82: {fileID: 82000011834705700}
   - 114: {fileID: 114000013712053610}
+  - 114: {fileID: 114000013637670072}
   m_Layer: 0
   m_Name: Strafing Enemy
   m_TagString: Enemy
@@ -1891,6 +1892,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startHealth: 1
   _maxHealth: 1
+--- !u!114 &114000013637670072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012868669908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1dbfead45be9b4da82562533d270f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013712053610
 MonoBehaviour:
   m_ObjectHideFlags: 1
