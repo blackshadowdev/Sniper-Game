@@ -100,7 +100,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4000014110863096, guid: a4b4514f8ba7641bb9f8b53a026e2263,
     type: 2}
   m_PrefabInternal: {fileID: 1199232901}
---- !u!43 &373303985
+--- !u!43 &929044926
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -228,7 +228,19 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!21 &656428858
+--- !u!114 &1050318143 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000014105877650, guid: a4b4514f8ba7641bb9f8b53a026e2263,
+    type: 2}
+  m_PrefabInternal: {fileID: 1199232901}
+  m_Script: {fileID: 11500000, guid: 3de70370576644535bc8e07899cbc78b, type: 3}
+--- !u!114 &1050318144 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000013451404250, guid: a4b4514f8ba7641bb9f8b53a026e2263,
+    type: 2}
+  m_PrefabInternal: {fileID: 1199232901}
+  m_Script: {fileID: 11500000, guid: 0dbff3563821f7d4081946b3b6e9f435, type: 3}
+--- !u!21 &1164882725
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -257,18 +269,6 @@ Material:
     - first:
         name: _Color
       second: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1050318143 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000014105877650, guid: a4b4514f8ba7641bb9f8b53a026e2263,
-    type: 2}
-  m_PrefabInternal: {fileID: 1199232901}
-  m_Script: {fileID: 11500000, guid: 3de70370576644535bc8e07899cbc78b, type: 3}
---- !u!114 &1050318144 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000013451404250, guid: a4b4514f8ba7641bb9f8b53a026e2263,
-    type: 2}
-  m_PrefabInternal: {fileID: 1199232901}
-  m_Script: {fileID: 11500000, guid: 0dbff3563821f7d4081946b3b6e9f435, type: 3}
 --- !u!1001 &1199232901
 Prefab:
   m_ObjectHideFlags: 0
@@ -317,12 +317,12 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 373303985}
+      objectReference: {fileID: 929044926}
     - target: {fileID: 23000011134603738, guid: a4b4514f8ba7641bb9f8b53a026e2263,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 656428858}
+      objectReference: {fileID: 1164882725}
     - target: {fileID: 114000011854166118, guid: a4b4514f8ba7641bb9f8b53a026e2263,
         type: 2}
       propertyPath: _spotterTool

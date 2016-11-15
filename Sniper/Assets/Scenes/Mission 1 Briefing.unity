@@ -161,35 +161,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd93221b7b3f91b449b5e28f36d1a01b, type: 2}
   m_IsPrefabParent: 0
---- !u!21 &307477514
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &580613963
 Prefab:
   m_ObjectHideFlags: 0
@@ -228,6 +199,16 @@ Prefab:
     - target: {fileID: 4000011905395596, guid: 34cacb9d0b4da1e4fbe83aae12bd266d, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012021768878, guid: 34cacb9d0b4da1e4fbe83aae12bd266d,
+        type: 2}
+      propertyPath: _sceneToLoad
+      value: Lunch Interrupted
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013188213360, guid: 34cacb9d0b4da1e4fbe83aae12bd266d,
+        type: 2}
+      propertyPath: _sceneToLoad
+      value: Lunch Interrupted
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34cacb9d0b4da1e4fbe83aae12bd266d, type: 2}
@@ -275,16 +256,16 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 914604180}
+      objectReference: {fileID: 1038749313}
     - target: {fileID: 23000011094176730, guid: 5f987706d3e8caf45b0711d5cb4fa5f1,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 307477514}
+      objectReference: {fileID: 1217046433}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f987706d3e8caf45b0711d5cb4fa5f1, type: 2}
   m_IsPrefabParent: 0
---- !u!43 &914604180
+--- !u!43 &1038749313
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -429,6 +410,35 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012656029064, guid: 5f987706d3e8caf45b0711d5cb4fa5f1,
     type: 2}
   m_PrefabInternal: {fileID: 627179670}
+--- !u!21 &1217046433
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1414565274 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012357356652, guid: 5f987706d3e8caf45b0711d5cb4fa5f1,
