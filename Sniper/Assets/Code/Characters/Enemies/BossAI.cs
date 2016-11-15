@@ -7,8 +7,44 @@ public class BossAI : BaseAI
     private bool _bossIsEntering;
     private bool _bossMovingToWaypoint;
     private float _bossNewWaypointTime;
+	[SerializeField] Transform _raycastOrigin;
+	private bool _busyAvoidingCollision;
 
-    protected override void OnEnable()
+	private void Raycast()
+	{
+		Vector3 _fwd = _raycastOrigin.TransformDirection(Vector3.forward);
+		RaycastHit _hit;
+		Debug.DrawRay(_raycastOrigin.position, _fwd * 10, Color.green, 1);
+		if (Physics.Raycast(_raycastOrigin.position, _fwd, out _hit)) {
+			//InteractiveItem interactible = _hit.collider.GetComponent<InteractiveItem>();   //attempt to get the InteractiveItem on the hit object                                                                                // if (_rifle._fired) 
+			{
+				if (Vector3.Distance(transform.position, _hit.point) < 2 && !_busyAvoidingCollision)
+				{
+					StartCoroutine(AvoidCollision());
+				}
+			}
+		}
+	}
+
+	private IEnumerator AvoidCollision()
+	{
+		Debug.Log("starting AvoidCollision");
+		_busyAvoidingCollision = true;
+		Animator.SetTrigger("StandIdleTrigger");
+		yield return new WaitForSeconds(0.5f);
+		int _randomDirection = Random.Range(0,1);
+		if (_randomDirection == 0)
+			Animator.SetTrigger("RollLeftTrigger");
+		if (_randomDirection == 1)
+			Animator.SetTrigger("RollRightTrigger");
+		yield return new WaitForSeconds(1);
+		StartCoroutine(BossFireSequence());
+		yield return new WaitForSeconds(1);
+		_busyAvoidingCollision = false;
+	}
+
+
+	protected override void OnEnable()
     {
         transform.LookAt(WaypointNavigator.CurrentWaypoint);
         Animator.SetTrigger("RunTrigger");
@@ -19,7 +55,11 @@ public class BossAI : BaseAI
     {
         if (!_bossIsEntering)
         {
-            transform.LookAt(WaypointNavigator.CurrentWaypoint);
+			Raycast();
+
+
+
+			//transform.LookAt(WaypointNavigator.CurrentWaypoint);
             if (WaypointNavigator.InStoppingDistance)
             {
                 if (!ImBusy)
@@ -76,7 +116,8 @@ public class BossAI : BaseAI
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    
+	private void OnCollisionStay(Collision collision)
     {
         if ((collision.gameObject.tag != "Floor") && (collision.gameObject.tag != "Bullet"))
         {
@@ -84,6 +125,7 @@ public class BossAI : BaseAI
             StartCoroutine(BossWaitThenResumeMoving());
         }
     }
+    
 
     private IEnumerator BossWaitThenResumeMoving()
     {
@@ -107,10 +149,13 @@ public class BossAI : BaseAI
     private void BossFindNewWaypoint()
     {
         var waypoint = WaypointNavigator.CurrentWaypoint;
-        var tempX = waypoint.position.x + Random.Range(-10f, 10f);
-        var tempZ = waypoint.position.z + Random.Range(-10f, 10f);
+		Debug.Log("starting waypoint = " + waypoint.position);
+		var tempX = waypoint.position.x + Random.Range(-5f, 5f);
+		var tempZ = waypoint.position.z + Random.Range(-5f, 5f);
         waypoint.position = new Vector3(tempX, waypoint.position.y, tempZ);
+		Debug.Log("boss new waypoint = " + waypoint.position);
         _bossNewWaypointTime = Time.time;
+		transform.LookAt(waypoint);
     }
 
     private void BossResumeMoving()
