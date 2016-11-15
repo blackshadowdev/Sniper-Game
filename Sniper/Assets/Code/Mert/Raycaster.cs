@@ -8,12 +8,10 @@ public class Raycaster : MonoBehaviour {
     [SerializeField] private EnemyManager _enemyManagerScript;
     [SerializeField] private CivilianAI _civilianController;
     [SerializeField] private UIManager _UIManager;
-    [SerializeField] private Rifle _rifle;
-
+   
     void Start() {
         _enemyManagerScript = FindObjectOfType<EnemyManager>();
         _UIManager = FindObjectOfType<UIManager>();
-        _rifle = FindObjectOfType<Rifle>();
     }
 
     public void Raycast() {

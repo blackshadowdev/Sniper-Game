@@ -593,7 +593,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012958302258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -713,7 +713,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013598930152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: 3, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -863,7 +863,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014261053830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: 3, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1950,11 +1950,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 0}
   _leftOrRight: left
-  _laser: {fileID: 114000013244018050}
   _rifle: {fileID: 0}
   _spotterTool: {fileID: 0}
+  _UIManager: {fileID: 0}
+  _scope: {fileID: 0}
+  _pivotRifle: {fileID: 0}
 --- !u!114 &114000012170522128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2012,6 +2013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _leftController: {fileID: 4000012971290648}
+  _camera: {fileID: 0}
 --- !u!114 &114000013093613878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2057,11 +2059,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6233291fac4e47963a25fb4a4fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneManager: {fileID: 0}
   _leftOrRight: right
-  _laser: {fileID: 114000013244018050}
   _rifle: {fileID: 0}
   _spotterTool: {fileID: 0}
+  _UIManager: {fileID: 0}
+  _scope: {fileID: 0}
+  _pivotRifle: {fileID: 0}
 --- !u!114 &114000013547050058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2125,25 +2128,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dbff3563821f7d4081946b3b6e9f435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scopeOn: 0
-  _camera: {fileID: 0}
-  _scopeCamera: {fileID: 0}
   _rifleCanFire: 0
-  _rightPadY: 0
   _rifleAudioSource: {fileID: 0}
   _rifleShot: {fileID: 0}
   _rifleChamber: {fileID: 0}
   _magazineReload: {fileID: 0}
-  _bulletIcon1: {fileID: 0}
-  _bulletIcon2: {fileID: 0}
-  _bulletIcon3: {fileID: 0}
-  _bulletIcon4: {fileID: 0}
-  _heartIcon1: {fileID: 0}
-  _heartIcon2: {fileID: 0}
-  _heartIcon3: {fileID: 0}
-  _bloodPfxPrefab: {fileID: 0}
-  _scoreText: {fileID: 0}
-  _bloodSplatter: {fileID: 0}
+  _enemyManagerScript: {fileID: 0}
+  _raycaster: {fileID: 0}
+  _fired: 0
+  _muzzleFlashPfx: {fileID: 0}
+  _startingQuantityBullets: 0
 --- !u!124 &124000012897732660
 Behaviour:
   m_ObjectHideFlags: 1
