@@ -35,6 +35,7 @@ public class StrafingEnemyAI : BaseAI
         if (WaypointNavigator.CurrentIndex == 0)
         {
             ImBusy = false;
+			transform.position = WaypointNavigator.CurrentWaypoint.position;				// reset to starting waypoint.position to prevent drift;
         }
         else
         {
