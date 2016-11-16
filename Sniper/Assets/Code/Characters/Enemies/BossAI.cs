@@ -8,39 +8,21 @@ public class BossAI : BaseAI
     private bool _bossMovingToWaypoint;
     private float _bossNewWaypointTime;
 	[SerializeField] Transform _raycastOrigin;
-	private bool _busyAvoidingCollision;
+	private Transform _startingWaypoint;
 
-	private void Raycast()
-	{
-		Vector3 _fwd = _raycastOrigin.TransformDirection(Vector3.forward);
-		RaycastHit _hit;
-		Debug.DrawRay(_raycastOrigin.position, _fwd * 10, Color.green, 1);
-		if (Physics.Raycast(_raycastOrigin.position, _fwd, out _hit)) {
-			//InteractiveItem interactible = _hit.collider.GetComponent<InteractiveItem>();   //attempt to get the InteractiveItem on the hit object                                                                                // if (_rifle._fired) 
-			{
-				if (Vector3.Distance(transform.position, _hit.point) < 2 && !_busyAvoidingCollision)
-				{
-					StartCoroutine(AvoidCollision());
-				}
-			}
-		}
-	}
 
-	private IEnumerator AvoidCollision()
+
+	private IEnumerator AvoidCollision(bool _rollLeft)
 	{
-		Debug.Log("starting AvoidCollision");
-		_busyAvoidingCollision = true;
+		ImBusy = true;
 		Animator.SetTrigger("StandIdleTrigger");
 		yield return new WaitForSeconds(0.5f);
-		int _randomDirection = Random.Range(0,1);
-		if (_randomDirection == 0)
+		if (_rollLeft)
 			Animator.SetTrigger("RollLeftTrigger");
-		if (_randomDirection == 1)
+		else
 			Animator.SetTrigger("RollRightTrigger");
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(1.5f);
 		StartCoroutine(BossFireSequence());
-		yield return new WaitForSeconds(1);
-		_busyAvoidingCollision = false;
 	}
 
 
@@ -49,6 +31,7 @@ public class BossAI : BaseAI
         transform.LookAt(WaypointNavigator.CurrentWaypoint);
         Animator.SetTrigger("RunTrigger");
         _bossIsEntering = true;
+		_startingWaypoint = WaypointNavigator.CurrentWaypoint;			// trying to add fix waypoint bug
     }
 
     protected override void OnUpdate()
@@ -56,32 +39,15 @@ public class BossAI : BaseAI
         if (!_bossIsEntering)
         {
 			Raycast();
-
-
-
-			//transform.LookAt(WaypointNavigator.CurrentWaypoint);
             if (WaypointNavigator.InStoppingDistance)
             {
                 if (!ImBusy)
                 {
                     ImBusy = true;
-                    Debug.Log("boss near waypoint; stop and fire");
-                    StopAllCoroutines();
                     StartCoroutine(BossFireSequence());
-                }
-            }
-
-            if (Time.time - _bossNewWaypointTime > 12f)
-            {
-                if (!ImBusy)
-                {
-                    Debug.Log("boss time out must fire");
-                    StartCoroutine(BossFireSequence());
-                    ImBusy = true;
                 }
             }
         }
-
         else if (_bossIsEntering)
         {
             if (WaypointNavigator.InStoppingDistance)
@@ -121,7 +87,8 @@ public class BossAI : BaseAI
     {
         if ((collision.gameObject.tag != "Floor") && (collision.gameObject.tag != "Bullet"))
         {
-            Animator.SetTrigger("RollBackTrigger");
+            ImBusy = true;
+			Animator.SetTrigger("RollBackTrigger");
             StartCoroutine(BossWaitThenResumeMoving());
         }
     }
@@ -133,6 +100,7 @@ public class BossAI : BaseAI
         BossFindNewWaypoint();
         BossResumeMoving();
     }
+    
 
     private IEnumerator BossFireSequence()
     {
@@ -143,36 +111,58 @@ public class BossAI : BaseAI
         yield return new WaitForSeconds(0.5f);
         BossFindNewWaypoint();
         BossResumeMoving();
-        ImBusy = false;
     }
 
     private void BossFindNewWaypoint()
     {
-        var waypoint = WaypointNavigator.CurrentWaypoint;
-		Debug.Log("starting waypoint = " + waypoint.position);
+		//var waypoint = WaypointNavigator.CurrentWaypoint;					// i want every new waypoint to be based off of the original waypoint, not the last waypoint
+		var waypoint = _startingWaypoint;									// but this doesn't work, either.
+
 		var tempX = waypoint.position.x + Random.Range(-5f, 5f);
 		var tempZ = waypoint.position.z + Random.Range(-5f, 5f);
-        waypoint.position = new Vector3(tempX, waypoint.position.y, tempZ);
+		waypoint.position = new Vector3(tempX, waypoint.position.y, tempZ);
 		Debug.Log("boss new waypoint = " + waypoint.position);
-        _bossNewWaypointTime = Time.time;
 		transform.LookAt(waypoint);
     }
 
     private void BossResumeMoving()
     {
         if (Health.CurrentHealth == 3)
-        {
             Animator.SetTrigger("SlowWalkTrigger");
-        }
         else if (Health.CurrentHealth == 2)
-        {
             Animator.SetTrigger("WalkTrigger");
-        }
         else if (Health.CurrentHealth == 1)
-        {
             Animator.SetTrigger("RunTrigger");
-        }
+		ImBusy = false;
     }
+
+	private void Raycast()
+	{
+		Vector3 _fwd = _raycastOrigin.TransformDirection(Vector3.forward);
+		RaycastHit _hit;
+		Debug.DrawRay(_raycastOrigin.position, _fwd * 10, Color.green, 1);
+		if (Physics.Raycast(_raycastOrigin.position, _fwd, out _hit)) 
+		{
+			if (Vector3.Distance(transform.position, _hit.point) < 1 && !ImBusy)
+			{
+				float _leftDistance = 100;												// had to assign these a value, or i'd get errors... not sure why
+				float _rightDistance = 100;
+				Vector3 _left = _raycastOrigin.TransformDirection(Vector3.left);
+				Debug.DrawRay(_raycastOrigin.position, _left * 10, Color.blue, 1);
+				if (Physics.Raycast(_raycastOrigin.position, _left, out _hit)) 
+					_leftDistance = Vector3.Distance(transform.position, _hit.point);
+				Vector3 _right = _raycastOrigin.TransformDirection(Vector3.right);
+				Debug.DrawRay(_raycastOrigin.position, _right * 10, Color.red, 1);
+				if (Physics.Raycast(_raycastOrigin.position, _right, out _hit)) 
+					_rightDistance = Vector3.Distance(transform.position, _hit.point);
+				bool _rollLeft = false;
+				if (_leftDistance > _rightDistance)
+					_rollLeft = true;
+				StartCoroutine(AvoidCollision(_rollLeft));
+			}
+		}
+	}
+
 
     private void TempEndLevel()
     {

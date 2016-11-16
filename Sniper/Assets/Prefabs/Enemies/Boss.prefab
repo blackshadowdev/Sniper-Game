@@ -189,6 +189,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000010902037784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011996456546}
+  m_Layer: 0
+  m_Name: RaycastOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011180780194
 GameObject:
   m_ObjectHideFlags: 1
@@ -899,12 +914,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010594327946}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -138.36, y: 0.07997983, z: -17.04}
+  m_LocalPosition: {x: -38, y: 0.315, z: -38}
   m_LocalScale: {x: 0.6641948, y: 0.66419494, z: 0.66419494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000013495115894}
   - {fileID: 4000011976680960}
+  - {fileID: 4000011996456546}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000010428356416
@@ -1267,6 +1283,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000010391786846}
   m_RootOrder: 1
+--- !u!4 &4000011996456546
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010902037784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.231, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010391786846}
+  m_RootOrder: 2
 --- !u!4 &4000012038731054
 Transform:
   m_ObjectHideFlags: 1
@@ -1861,8 +1890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618b519fcdce3054d823bf384d1eeb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startHealth: 1
-  _maxHealth: 1
+  _startHealth: 3
+  _maxHealth: 3
 --- !u!114 &114000011457325934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1885,6 +1914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f556f32f53b8c941846453e597c2548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _raycastOrigin: {fileID: 4000011996456546}
 --- !u!114 &114000012683746104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1914,7 +1944,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stoppingDistance: 1
-  _waypoints: []
+  _waypoints:
+  - {fileID: 0}
 --- !u!136 &136000011280639884
 CapsuleCollider:
   m_ObjectHideFlags: 1
