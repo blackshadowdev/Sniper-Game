@@ -118,8 +118,9 @@ public class BossAI : BaseAI
 		//var waypoint = WaypointNavigator.CurrentWaypoint;					// i want every new waypoint to be based off of the original waypoint, not the last waypoint
 		var waypoint = _startingWaypoint;									// but this doesn't work, either.
 
-		var tempX = waypoint.position.x + Random.Range(-5f, 5f);
-		var tempZ = waypoint.position.z + Random.Range(-5f, 5f);
+
+		var tempX = _startingWaypoint.position.x + Random.Range(-5f, 5f);
+		var tempZ = _startingWaypoint.position.z + Random.Range(-5f, 5f);
 		waypoint.position = new Vector3(tempX, waypoint.position.y, tempZ);
 		Debug.Log("boss new waypoint = " + waypoint.position);
 		transform.LookAt(waypoint);
