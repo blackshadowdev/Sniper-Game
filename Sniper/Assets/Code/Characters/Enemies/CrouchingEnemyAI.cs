@@ -4,13 +4,11 @@ using UnityEngine;
 public class CrouchingEnemyAI : BaseAI
 {
     [SerializeField] private AudioClip _tellAudioClip;
-	private Vector3 _startingPosition;
-	private Quaternion _startingRotation;
+
 
     protected override void OnEnable()
     {
-		_startingPosition = transform.position;
-		_startingRotation = transform.rotation;
+		
 		Animator.SetTrigger("CrouchTrigger");
     }
 
@@ -22,8 +20,6 @@ public class CrouchingEnemyAI : BaseAI
 
     protected override void OnUpdate()
     {
-		transform.position = _startingPosition;
-		transform.rotation = _startingRotation;
     }
 
     protected override void OnDamage(DamageInfo info)
