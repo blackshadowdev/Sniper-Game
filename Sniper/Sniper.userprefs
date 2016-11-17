@@ -1,18 +1,14 @@
-﻿<Properties StartupItem="Sniper.CSharp.Plugins.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Characters/Enemies/BossAI.cs">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Standard Assets/Utility/AutoMoveAndRotate.cs">
     <Files>
-      <File FileName="Assets/Code/Mert/Raycaster.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/ViveControlsExample.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Mert/ViveControllerLaptop.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/EnemyManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/SteamVR/Scripts/SteamVR_Controller.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Characters/Enemies/StrafingEnemyAI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Characters/Enemies/StrafingEnemyAI.cs" Line="32" Column="46" />
       <File FileName="Assets/Code/Characters/BaseAI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/CivilianAI.cs" Line="1" Column="1" />
       <File FileName="Assets/Code/Characters/WaypointNavigator.cs" Line="10" Column="50" />
-      <File FileName="Assets/Code/pivotRifle.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Characters/Enemies/BossAI.cs" Line="80" Column="1" />
+      <File FileName="Assets/Code/Characters/Enemies/BossAI.cs" Line="34" Column="76" />
+      <File FileName="Assets/Code/Characters/Enemies/CrouchingEnemyAI.cs" Line="22" Column="6" />
+      <File FileName="Assets/Standard Assets/Utility/AutoMoveAndRotate.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -29,8 +25,6 @@
       <Breakpoint file="/Users/andrewmccormick/Documents/PulseVR Projects/Sniper/Sniper/Assets/Code/AIControl.cs" line="335" column="1" />
       <Breakpoint file="/Users/andrewmccormick/Documents/PulseVR Projects/Sniper/Sniper/Assets/Code/AIControl.cs" line="256" column="1" />
       <Breakpoint file="/Users/andrewmccormick/Documents/PulseVR Projects/Sniper/Sniper/Assets/Code/AIControl.cs" line="235" column="1" />
-      <Breakpoint file="/Users/andrewmccormick/Documents/PulseVR Projects/Sniper/Sniper/Assets/Code/Characters/Enemies/BossAI.cs" line="151" column="1" />
-      <Breakpoint file="/Users/andrewmccormick/Documents/PulseVR Projects/Sniper/Sniper/Assets/Code/Characters/Enemies/BossAI.cs" line="53" column="57" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
