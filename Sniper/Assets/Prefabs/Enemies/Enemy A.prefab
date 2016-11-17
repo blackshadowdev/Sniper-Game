@@ -259,6 +259,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010165843486}
+  - 65: {fileID: 65000013939724856}
   m_Layer: 0
   m_Name: EthanHead
   m_TagString: Untagged
@@ -1442,7 +1443,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012905724678}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 6.08, y: 0, z: 18.45}
+  m_LocalPosition: {x: -77.24815, y: 0.15500012, z: -34.98703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_Children:
@@ -2504,6 +2505,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65000013939724856
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010974575044}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23, y: 0.15, z: 0.14}
+  m_Center: {x: -0.12, y: -0.01, z: 0}
 --- !u!82 &82000012458909476
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2671,13 +2684,13 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012905724678}
-  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_Material: {fileID: 13400000, guid: 921fe1ba2c0c25c439e3809ef003cff2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.14
-  m_Height: 1.6
+  m_Radius: 0.17
+  m_Height: 1.31
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.63, z: 0}
 --- !u!137 &137000012051684254
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

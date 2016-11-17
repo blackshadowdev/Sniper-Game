@@ -7,7 +7,7 @@ using System.Collections;
 public class MenuButton : MonoBehaviour {
     public event Action<MenuButton> OnButtonShot;                   //This event is triggered when the selection button has been shot at.
 
-    [SerializeField] private string _sceneToLoad;
+    public string _sceneToLoad;
     [SerializeField] private InteractiveItem _interactiveItem;      // The interactive item for where the user should shoot to load the level.
     [SerializeField] private Rifle  _rifle;
 

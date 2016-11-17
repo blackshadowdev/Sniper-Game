@@ -6,6 +6,7 @@ public class EnemyHealth : BaseHealth
 
     protected override void OnDamage(DamageInfo info)
     {
+
     }
 
     protected override void OnHealthChange()

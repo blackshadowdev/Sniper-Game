@@ -10,9 +10,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mission 1 Briefing.unity
   - enabled: 1
-    path: Assets/Scenes/Cartoon City 1.unity
-  - enabled: 1
     path: Assets/Scenes/Lunch Interrupted.unity
+  - enabled: 1
+    path: Assets/Scenes/Cartoon City 1.unity
   - enabled: 1
     path: Assets/Scenes/YouDied.unity
   - enabled: 1

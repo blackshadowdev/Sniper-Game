@@ -109,10 +109,12 @@
     <Compile Include="Assets\Code\EnemyManager.cs" />
     <Compile Include="Assets\Code\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Code\Interfaces\IHealth.cs" />
+    <Compile Include="Assets\Code\Mert\BriefingMenuManager.cs" />
     <Compile Include="Assets\Code\Mert\InteractiveItem.cs" />
     <Compile Include="Assets\Code\Mert\MenuButton.cs" />
     <Compile Include="Assets\Code\Mert\Raycaster.cs" />
     <Compile Include="Assets\Code\Mert\Rifle.cs" />
+    <Compile Include="Assets\Code\Mert\SceneChecker.cs" />
     <Compile Include="Assets\Code\Mert\Statistics.cs" />
     <Compile Include="Assets\Code\Mert\UIManager.cs" />
     <Compile Include="Assets\Code\Mert\ViveControllerLaptop.cs" />
