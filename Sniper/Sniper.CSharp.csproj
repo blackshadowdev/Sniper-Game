@@ -110,6 +110,7 @@
     <Compile Include="Assets\Code\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Code\Interfaces\IHealth.cs" />
     <Compile Include="Assets\Code\Mert\BriefingMenuManager.cs" />
+    <Compile Include="Assets\Code\Mert\DiedMenuManager.cs" />
     <Compile Include="Assets\Code\Mert\InteractiveItem.cs" />
     <Compile Include="Assets\Code\Mert\MenuButton.cs" />
     <Compile Include="Assets\Code\Mert\Raycaster.cs" />

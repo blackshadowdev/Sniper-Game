@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
             if ((Application.loadedLevelName == "Cartoon City 1") ||
                 (Application.loadedLevelName == "Lunch Interrupted"))
             {
-                SceneManager.LoadScene("YouDied");
+               // SceneManager.LoadScene("YouDied");
             }
         }
     }

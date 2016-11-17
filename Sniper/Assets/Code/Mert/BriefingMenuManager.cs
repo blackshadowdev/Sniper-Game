@@ -17,17 +17,17 @@ public class BriefingMenuManager : MonoBehaviour
         switch(_prevScene) {
             case "StartMenu":
                 sceneIndex = 0;
-                sceneNameToLoad = "Lunch Interrupted";
+                sceneNameToLoad = "Cartoon City 1";
                 
                 break;
-            case "Lunch Interrupted":
+            case "Cartoon City 1":
                 sceneIndex = 1;
-                sceneNameToLoad = "Cartoon City 1";
+                sceneNameToLoad = "Lunch Interrupted";
                 break;
 
-            case "Cartoon City 1":
+            case "Lunch Interrupted":
                 sceneIndex = 2;
-                sceneNameToLoad = "YouWin";
+                sceneNameToLoad = "Lighthouse at Night";
                 break;
 
 
@@ -41,13 +41,9 @@ public class BriefingMenuManager : MonoBehaviour
         Debug.Log( "Scene index:" + sceneIndex );
     }
 
-    public void Update() {
-         
-    }
-
     private void UpdateBriefingMenu(int index) {
 
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 3; i++) {
             if(i == index) {
                 _missionText[i].enabled = true;
                 _targetImage[i].enabled = true;

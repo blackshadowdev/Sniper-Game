@@ -12,6 +12,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lunch Interrupted.unity
   - enabled: 1
+    path: Assets/Scenes/Lighthouse at Night.unity
+  - enabled: 1
     path: Assets/Scenes/Cartoon City 1.unity
   - enabled: 1
     path: Assets/Scenes/YouDied.unity
