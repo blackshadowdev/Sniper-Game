@@ -915,7 +915,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010594327946}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -81.22542, y: 0.1550006, z: -30.175291}
+  m_LocalPosition: {x: -3.05, y: 0.315, z: 16.9}
   m_LocalScale: {x: 0.6641948, y: 0.66419494, z: 0.66419494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1928,6 +1928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastOrigin: {fileID: 4000011996456546}
+  _cameraFade: {fileID: 0}
 --- !u!114 &114000012683746104
 MonoBehaviour:
   m_ObjectHideFlags: 1

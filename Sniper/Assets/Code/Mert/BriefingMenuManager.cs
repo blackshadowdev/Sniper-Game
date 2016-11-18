@@ -35,14 +35,9 @@ public class BriefingMenuManager : MonoBehaviour
 
         UpdateBriefingMenu( sceneIndex );
         SetSceneToLoad( sceneNameToLoad );
-
-
-        Debug.Log( "Previous scene: " + _prevScene );
-        Debug.Log( "Scene index:" + sceneIndex );
     }
 
     private void UpdateBriefingMenu(int index) {
-
         for(int i = 0; i < 3; i++) {
             if(i == index) {
                 _missionText[i].enabled = true;

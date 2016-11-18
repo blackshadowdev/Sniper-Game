@@ -235,6 +235,8 @@
     <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_HiddenArea.shader" />
     <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_Overlay.shader" />
     <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
+    <None Include="Assets\Plugins\SteamVR\Resources\UIOverlay.shader" />
+    <None Include="Assets\Plugins\SteamVR\Resources\Unlit Transparent Color.shader" />
     <None Include="Assets\Plugins\SteamVR\readme.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />

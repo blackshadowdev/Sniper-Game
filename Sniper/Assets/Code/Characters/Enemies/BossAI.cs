@@ -8,7 +8,9 @@ public class BossAI : BaseAI
     private bool _bossMovingToWaypoint;
     private float _bossNewWaypointTime;
 	[SerializeField] Transform _raycastOrigin;
-	private Transform _startingWaypoint;
+    [SerializeField]
+    private VRCameraFade _cameraFade;                 // This fades the scene out when a new scene is about to be loaded.
+    private Transform _startingWaypoint;
 
 
 
@@ -78,7 +80,7 @@ public class BossAI : BaseAI
         else
         {
             Animator.SetTrigger("DeathTrigger");
-            Invoke("TempEndLevel", 2);
+            StartCoroutine(_cameraFade.BeginFadeOut(true));
         }
     }
 
@@ -165,8 +167,11 @@ public class BossAI : BaseAI
 	}
 
 
-    private void TempEndLevel()
+    private IEnumerator TempEndLevel()
     {
+        //Wait for camera to fade code
+        yield return StartCoroutine(_cameraFade.BeginFadeOut(true));
+
         SceneManager.LoadScene("YouWin");
     }
 }

@@ -10,6 +10,7 @@ public class MenuButton : MonoBehaviour {
     public string _sceneToLoad;
     [SerializeField] private InteractiveItem _interactiveItem;      // The interactive item for where the user should shoot to load the level.
     [SerializeField] private Rifle  _rifle;
+    [SerializeField] private VRCameraFade _cameraFade;                 // This fades the scene out when a new scene is about to be loaded.
 
     private void OnEnable() {
         _interactiveItem.OnShoot += HandleSelection;
@@ -20,11 +21,13 @@ public class MenuButton : MonoBehaviour {
     }
 
     private IEnumerator ActivateButton() {
-        if(OnButtonShot != null)
+        
+        // If anything is subscribed to the OnButtonShot event, call it.
+        if (OnButtonShot != null)
             OnButtonShot(this);
 
-        //TODO Mert: Add wait for camera to fade code
-        yield return null; //This is temporary
+        //Wait for camera to fade code
+        yield return StartCoroutine(_cameraFade.BeginFadeOut(true));
 
         //Load Level
         SceneManager.LoadScene(_sceneToLoad);
