@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SpriteRenderer _heartIcon3;
     [SerializeField] private Renderer _bloodSplatter;
     [SerializeField] private VibrateController _vibrateController;
+    [SerializeField] private VRCameraFade _cameraFade;  // This fades the scene out when a new scene is about to be loaded.
 
     public void PlayerIsHit()
     {
@@ -29,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
             if ((Application.loadedLevelName == "Cartoon City 1") ||
                 (Application.loadedLevelName == "Lunch Interrupted"))
             {
-                SceneManager.LoadScene("YouDied");
+                StartCoroutine(LoadDieScene());
             }
         }
     }
@@ -41,5 +43,13 @@ public class PlayerHealth : MonoBehaviour
             var _tempAlpha = _bloodSplatter.material.color.a - 0.01f;
             _bloodSplatter.material.color = new Color(1, 1, 1, _tempAlpha);
         }
+    }
+
+    private IEnumerator LoadDieScene() {
+        //Wait for camera to fade
+        yield return StartCoroutine(_cameraFade.BeginFadeOut(true));
+
+        //Load Level
+        SceneManager.LoadScene("YouDied");
     }
 }
