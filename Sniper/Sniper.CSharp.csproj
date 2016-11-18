@@ -106,6 +106,7 @@
     <Compile Include="Assets\Code\Characters\RagdollCreator.cs" />
     <Compile Include="Assets\Code\Characters\WaypointNavigator.cs" />
     <Compile Include="Assets\Code\CivilianAI.cs" />
+    <Compile Include="Assets\Code\ConstrainRigidbody.cs" />
     <Compile Include="Assets\Code\EnemyManager.cs" />
     <Compile Include="Assets\Code\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Code\Interfaces\IHealth.cs" />

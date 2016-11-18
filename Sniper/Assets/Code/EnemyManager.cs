@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class EnemyManager : MonoBehaviour {
 
     private int _numberOfKills;
+    private int _numberOfHeadshots;
 	private float _startTime;
 	private float _elapsedTime;
 	private float _timeLastAction;

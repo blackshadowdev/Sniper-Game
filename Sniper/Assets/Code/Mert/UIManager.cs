@@ -16,13 +16,7 @@ public class UIManager : MonoBehaviour {
 
     public ParticleSystem _scorePFX;
     public ParticleSystem _timerPfx;
-    #region Temporarily not needed
-    //private float _lastRightPadY;
-    //public Light _lightSource;
-    //public Renderer _fadeToBlack;
-    //public int _playerHealth;
-    #endregion
-
+    
     void Start () {
 		_startTime = Time.time;
 		_scoreText.text = "0";		
