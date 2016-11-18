@@ -100,6 +100,8 @@
      <None Include="Assets\AssetPacks\MCP\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\FX-SimpleWater4.shader" />
      <None Include="Assets\AssetPacks\MCP\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
+     <None Include="Assets\Plugins\SteamVR\Resources\Unlit Transparent Color.shader" />
+     <None Include="Assets\Plugins\SteamVR\Resources\UIOverlay.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_Overlay.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\Plugins\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
