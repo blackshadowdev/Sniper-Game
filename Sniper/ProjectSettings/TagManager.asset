@@ -12,6 +12,7 @@ TagManager:
   - LadderLandingPad
   - Collide
   - Floor
+  - Waypoint
   layers:
   - Default
   - TransparentFX

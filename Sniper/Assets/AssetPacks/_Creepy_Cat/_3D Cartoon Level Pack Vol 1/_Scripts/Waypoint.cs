@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Waypoint : MonoBehaviour {
 	
+
 	//SHOW TO USE:
 	//1. Attach this script to a GameObject with a RidgidBody and a Collider.
 	//2. Change the "Size" variable in "Waypoints" to the number of waypoints you want to use.
@@ -140,23 +141,29 @@ public class Waypoint : MonoBehaviour {
 	}
 	
 	//The function "OnTriggerEnter" is called when a collision happens.
-	void OnTriggerEnter ()
+	void OnTriggerEnter (Collider other)
 	{
-		// When the GameObject collides with the waypoint's collider,
-		// activate "Slow()" by setting "functionState" to "1".
-		functionState = 1;
-		
-		// When the GameObject collides with the waypoint's collider,
-		// change the active waypoint to the next one in the array variable "waypoints".
-		WPindexPointer++;
-		
-		// When the array variable reaches the end of the list ...
-		if (WPindexPointer >= waypoints.Length)
+		if (other.transform.tag == "Waypoint")
 		{
-			// ... reset the active waypoint to the first object in the array variable
-			// "waypoints" and start from the beginning.
-			WPindexPointer = 0;
+
+			// When the GameObject collides with the waypoint's collider,
+			// activate "Slow()" by setting "functionState" to "1".
+			functionState = 1;
+
+			// When the GameObject collides with the waypoint's collider,
+			// change the active waypoint to the next one in the array variable "waypoints".
+			WPindexPointer++;
+
+			// When the array variable reaches the end of the list ...
+			if (WPindexPointer >= waypoints.Length)
+			{
+				// ... reset the active waypoint to the first object in the array variable
+				// "waypoints" and start from the beginning.
+				WPindexPointer = 0;
+			}
+				
 		}
+
 	}
 
 	//Function to draw path lines
